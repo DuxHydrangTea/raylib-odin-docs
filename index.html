@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raylib Odin - Giáo trình Game 2D</title>
+    
+    <!-- Marked.js để parse Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Highlight.js để tô màu code -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/tokyo-night-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --sidebar-bg: #1e293b;
+            --text-color: #e2e8f0;
+            --accent-color: #38bdf8;
+            --hover-color: #0ea5e9;
+            --border-color: #334155;
+            --code-bg: #0b1120;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            line-height: 1.6;
+        }
+
+        /* Sidebar Styling */
+        #sidebar {
+            width: 320px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background-color: var(--sidebar-bg);
+            z-index: 2;
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-section {
+            padding: 15px 0;
+        }
+
+        .nav-section-title {
+            padding: 5px 24px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #94a3b8;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 10px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent-color);
+        }
+
+        .nav-item.active {
+            background-color: rgba(56, 189, 248, 0.15);
+            color: var(--accent-color);
+            border-left: 3px solid var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Content Styling */
+        #content-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        #content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            padding-bottom: 100px;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Markdown Styling */
+        #content h1, #content h2, #content h3 {
+            color: #f8fafc;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            font-weight: 700;
+        }
+
+        #content h1 {
+            font-size: 2.5rem;
+            margin-top: 0;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        #content h2 { font-size: 1.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        
+        #content p { margin-bottom: 1.2em; color: #cbd5e1; }
+        
+        #content ul, #content ol { margin-bottom: 1.2em; padding-left: 25px; color: #cbd5e1; }
+        #content li { margin-bottom: 8px; }
+        
+        #content hr { border: 0; height: 1px; background: var(--border-color); margin: 2em 0; }
+        
+        #content a { color: var(--accent-color); text-decoration: none; transition: color 0.2s; }
+        #content a:hover { color: #7dd3fc; text-decoration: underline; }
+
+        #content blockquote {
+            border-left: 4px solid var(--accent-color);
+            background: rgba(56, 189, 248, 0.05);
+            padding: 15px 20px;
+            margin-bottom: 1.2em;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+
+        /* Code Block Styling */
+        pre {
+            background: var(--code-bg) !important;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+        }
+
+        p code, li code {
+            background: rgba(148, 163, 184, 0.15);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #7dd3fc;
+        }
+
+        /* Loader */
+        #loader {
+            display: none;
+            text-align: center;
+            padding: 50px;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(56, 189, 248, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Mobile Layout */
+        #mobile-header { display: none; }
+        .sidebar-overlay { display: none; }
+
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            
+            #sidebar { 
+                position: fixed; 
+                left: -100%; 
+                top: 0; 
+                height: 100vh; 
+                width: 280px; 
+                transition: left 0.3s ease; 
+                z-index: 100;
+            }
+            
+            #sidebar.active {
+                left: 0;
+                box-shadow: 4px 0 15px rgba(0, 0, 0, 0.5);
+            }
+
+            #mobile-header {
+                display: flex;
+                align-items: center;
+                background-color: var(--sidebar-bg);
+                padding: 15px 20px;
+                border-bottom: 1px solid var(--border-color);
+                position: sticky;
+                top: 0;
+                z-index: 50;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            }
+
+            .hamburger {
+                background: none;
+                border: none;
+                color: var(--accent-color);
+                font-size: 1.8rem;
+                cursor: pointer;
+                margin-right: 15px;
+                line-height: 1;
+            }
+
+            .mobile-title {
+                color: var(--accent-color);
+                font-weight: 700;
+                font-size: 1.1rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            #content-wrapper { flex: 1; width: 100%; }
+            #content { padding: 20px; padding-bottom: 80px; }
+
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0,0,0,0.6);
+                z-index: 90;
+                backdrop-filter: blur(2px);
+            }
+            .sidebar-overlay.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h1>Raylib Odin</h1>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Khởi động Dự án</div>
+            <ul class="nav-list" id="nav-thuchanh">
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/huong_dan_khoi_tao.md', this)">3 Bước Đầu Tiên</li>
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/huong_dan_hoan_thien.md', this)">5 Bước Hoàn Thiện</li>
+            </ul>
+        </div>
+
+
+        <div class="nav-section">
+            <div class="nav-section-title">Lộ trình Cơ Bản</div>
+            <ul class="nav-list" id="nav-basic">
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_1.md', this)">Chương 1: Core & Game Loop</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_2.md', this)">Chương 2: FPS & Basic Shapes</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_3.md', this)">Chương 3: Input & Vector Math</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_4.md', this)">Chương 4: Textures & UI Fonts</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_5.md', this)">Chương 5: Collision & Camera</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_6.md', this)">Chương 6: Audio & Save/Load</li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Lộ trình Nâng Cao</div>
+            <ul class="nav-list" id="nav-advanced">
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_7.md', this)">Chương 7: RenderTexture</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_8.md', this)">Chương 8: Blend Modes & Shaders</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_9.md', this)">Chương 9: 9-Patch & Scissor UI</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_10.md', this)">Chương 10: State Machine & Arena</li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Cấp độ Chuyên Gia</div>
+            <ul class="nav-list" id="nav-expert">
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_11.md', this)">Chương 11: Physics System</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_12.md', this)">Chương 12: ECS Architecture</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_13.md', this)">Chương 13: Particle System</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_14.md', this)">Chương 14: Tilemap & Culling</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_15.md', this)">Chương 15: Threads & Network</li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Nghệ thuật Thiết kế</div>
+            <ul class="nav-list" id="nav-art">
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_16.md', this)">Chương 16: AI & Pathfinding</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_17.md', this)">Chương 17: Skeletal Animation</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_18.md', this)">Chương 18: Profiling & Optimization</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_19.md', this)">Chương 19: Deployment & WASM</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_20.md', this)">Chương 20: Game Juice</li>
+            </ul>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Dự án Tốt Nghiệp (Vampire Survivors)</div>
+            <ul class="nav-list" id="nav-project">
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_1_core_va_tilemap.md', this)">Phần 1: Core, Camera & Tilemap</li>
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_2_ecs_va_ai.md', this)">Phần 2: ECS & 1000 Quái vật</li>
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_3_va_cham_va_hieu_ung.md', this)">Phần 3: Va chạm, Đạn & Hạt</li>
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_4_ui_va_state.md', this)">Phần 4: Thanh Máu & State Machine</li>
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_5_toi_uu_va_build.md', this)">Phần 5: Game Feel & Đóng gói Web</li>
+            </ul>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Tài liệu Gốc</div>
+            <ul class="nav-list" id="nav-docs">
+                <li class="nav-item" onclick="loadMarkdown('docs.md', this)">Từ điển Raylib Toàn Tập</li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="content-wrapper">
+        <!-- Header cho Mobile -->
+        <div id="mobile-header">
+            <button class="hamburger" onclick="toggleSidebar()">☰</button>
+            <div class="mobile-title">Raylib Odin</div>
+        </div>
+        
+        <!-- Lớp phủ mờ khi mở Sidebar -->
+        <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+        <div id="loader">
+            <div class="spinner"></div>
+            <div>Đang tải dữ liệu...</div>
+        </div>
+        <article id="content">
+            <h1>Chào mừng đến với Giáo Trình Raylib Odin!</h1>
+            <p>Hãy chọn một chương ở menu bên trái để bắt đầu đọc. Toàn bộ tài liệu đều hỗ trợ highlight code và giao diện tối mượt mà bảo vệ mắt.</p>
+            <p><em>Lưu ý: Để trình duyệt có quyền đọc các file .md trong máy tính, bạn cần chạy trang web này thông qua một local server (ví dụ như Live Server của VSCode, hoặc gõ lệnh <code>python -m http.server</code> trong terminal).</em></p>
+        </article>
+    </main>
+
+    <script>
+        // Toggle Sidebar on Mobile
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        }
+
+        // Cấu hình cơ bản cho Marked.js
+        marked.use({
+            breaks: true,
+            gfm: true
+        });
+
+        async function loadMarkdown(filePath, navElement) {
+            const contentDiv = document.getElementById('content');
+            const loader = document.getElementById('loader');
+            
+            // Xóa active class của tất cả các item
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            // Thêm active class cho item hiện tại
+            if(navElement) navElement.classList.add('active');
+
+            // Đóng sidebar trên mobile sau khi click
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('active');
+                document.querySelector('.sidebar-overlay').classList.remove('active');
+            }
+
+            // Hiển thị loader
+            contentDiv.style.display = 'none';
+            loader.style.display = 'block';
+
+            try {
+                // Fetch file Markdown (yêu cầu local server)
+                const response = await fetch(filePath);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const markdownText = await response.text();
+                
+                // Parse markdown sang HTML
+                const htmlContent = marked.parse(markdownText);
+                
+                // Hiển thị nội dung
+                contentDiv.innerHTML = htmlContent;
+                contentDiv.style.display = 'block';
+                
+                // Áp dụng Highlight.js thủ công
+                contentDiv.querySelectorAll('pre code').forEach((block) => {
+                    // Odin không có sẵn trong Highlight.js gốc, 
+                    // chúng ta ánh xạ tạm sang Go (có cú pháp khá giống) để tô màu cho đẹp.
+                    if (block.classList.contains('language-odin')) {
+                        block.classList.replace('language-odin', 'language-go');
+                    }
+                    hljs.highlightElement(block);
+                });
+                
+                // Reset scroll
+                document.getElementById('content-wrapper').scrollTop = 0;
+            } catch (error) {
+                console.error("Lỗi tải file:", error);
+                contentDiv.innerHTML = `
+                    <h1 style="color: #ef4444;">Không thể tải tài liệu</h1>
+                    <p>Lỗi: <code>${error.message}</code></p>
+                    <blockquote style="border-left-color: #ef4444; background: rgba(239, 68, 68, 0.05);">
+                        <strong>Chú ý:</strong> Do chính sách bảo mật CORS của trình duyệt, bạn không thể nháy đúp mở file HTML này trực tiếp (đường dẫn dạng file://).<br><br>
+                        Hãy chạy nó qua một Local Server. Bạn có thể mở Terminal tại thư mục dự án và gõ lệnh:<br>
+                        <code>python -m http.server</code><br>
+                        Hoặc nếu có cài Node.js, gõ:<br>
+                        <code>npx serve</code><br>
+                        Sau đó mở trình duyệt và truy cập <code>http://localhost:8000</code>.
+                    </blockquote>`;
+                contentDiv.style.display = 'block';
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
