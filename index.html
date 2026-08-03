@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raylib Odin - Giáo trình Game 2D</title>
-    
+
     <!-- PWA Config -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f172a">
@@ -12,13 +13,16 @@
 
     <!-- Marked.js để parse Markdown -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    
+
     <!-- Highlight.js để tô màu code -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/tokyo-night-dark.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/tokyo-night-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
@@ -129,12 +133,21 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Markdown Styling */
-        #content h1, #content h2, #content h3 {
+        #content h1,
+        #content h2,
+        #content h3 {
             color: #f8fafc;
             margin-top: 2em;
             margin-bottom: 0.8em;
@@ -151,17 +164,45 @@
             padding-bottom: 15px;
         }
 
-        #content h2 { font-size: 1.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
-        
-        #content p { margin-bottom: 1.2em; color: #cbd5e1; }
-        
-        #content ul, #content ol { margin-bottom: 1.2em; padding-left: 25px; color: #cbd5e1; }
-        #content li { margin-bottom: 8px; }
-        
-        #content hr { border: 0; height: 1px; background: var(--border-color); margin: 2em 0; }
-        
-        #content a { color: var(--accent-color); text-decoration: none; transition: color 0.2s; }
-        #content a:hover { color: #7dd3fc; text-decoration: underline; }
+        #content h2 {
+            font-size: 1.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        #content p {
+            margin-bottom: 1.2em;
+            color: #cbd5e1;
+        }
+
+        #content ul,
+        #content ol {
+            margin-bottom: 1.2em;
+            padding-left: 25px;
+            color: #cbd5e1;
+        }
+
+        #content li {
+            margin-bottom: 8px;
+        }
+
+        #content hr {
+            border: 0;
+            height: 1px;
+            background: var(--border-color);
+            margin: 2em 0;
+        }
+
+        #content a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        #content a:hover {
+            color: #7dd3fc;
+            text-decoration: underline;
+        }
 
         #content blockquote {
             border-left: 4px solid var(--accent-color);
@@ -186,7 +227,8 @@
             font-size: 0.9em;
         }
 
-        p code, li code {
+        p code,
+        li code {
             background: rgba(148, 163, 184, 0.15);
             padding: 2px 6px;
             border-radius: 4px;
@@ -215,26 +257,35 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Responsive Mobile Layout */
-        #mobile-header { display: none; }
-        .sidebar-overlay { display: none; }
+        #mobile-header {
+            display: none;
+        }
+
+        .sidebar-overlay {
+            display: none;
+        }
 
         @media (max-width: 768px) {
-            body { flex-direction: column; }
-            
-            #sidebar { 
-                position: fixed; 
-                left: -100%; 
-                top: 0; 
-                height: 100vh; 
-                width: 280px; 
-                transition: left 0.3s ease; 
+            body {
+                flex-direction: column;
+            }
+
+            #sidebar {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                height: 100vh;
+                width: 280px;
+                transition: left 0.3s ease;
                 z-index: 100;
             }
-            
+
             #sidebar.active {
                 left: 0;
                 box-shadow: 4px 0 15px rgba(0, 0, 0, 0.5);
@@ -249,7 +300,7 @@
                 position: sticky;
                 top: 0;
                 z-index: 50;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             }
 
             .hamburger {
@@ -270,100 +321,251 @@
                 letter-spacing: 1px;
             }
 
-            #content-wrapper { flex: 1; width: 100%; }
-            #content { padding: 20px; padding-bottom: 80px; }
+            #content-wrapper {
+                flex: 1;
+                width: 100%;
+            }
+
+            #content {
+                padding: 20px;
+                padding-bottom: 80px;
+            }
 
             .sidebar-overlay {
                 display: none;
                 position: fixed;
-                top: 0; left: 0; right: 0; bottom: 0;
-                background: rgba(0,0,0,0.6);
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.6);
                 z-index: 90;
                 backdrop-filter: blur(2px);
             }
+
             .sidebar-overlay.active {
                 display: block;
             }
         }
+    
+        .sidebar-tabs {
+            display: flex;
+            background: #0f172a;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 60px;
+            z-index: 40;
+        }
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            padding: 12px 2px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .tab-btn.active {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+        .tab-btn:hover {
+            color: #f8fafc;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
     </style>
 </head>
+
 <body>
 
     <nav id="sidebar">
-        <div class="sidebar-header">
+<div class="sidebar-header">
             <h1>Raylib Odin</h1>
         </div>
-        
-        <div class="nav-section">
+
+        <div class="sidebar-tabs">
+            <button class="tab-btn active" onclick="switchTab('tab-duan', this)">Dự Án</button>
+            <button class="tab-btn" onclick="switchTab('tab-lotrinh', this)">Lộ Trình</button>
+            <button class="tab-btn" onclick="switchTab('tab-vande', this)">Vấn Đề</button>
+            <button class="tab-btn" onclick="switchTab('tab-tailieu', this)">Tài Liệu</button>
+        </div>
+
+<div id="tab-duan" class="tab-content active">
+<div class="nav-section">
             <div class="nav-section-title">Khởi động Dự án</div>
             <ul class="nav-list" id="nav-thuchanh">
                 <li class="nav-item" onclick="loadMarkdown('thuchanh/huong_dan_khoi_tao.md', this)">3 Bước Đầu Tiên</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/huong_dan_hoan_thien.md', this)">5 Bước Hoàn Thiện</li>
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/huong_dan_hoan_thien.md', this)">5 Bước Hoàn Thiện
+                </li>
             </ul>
         </div>
-
-
-        <div class="nav-section">
+<div class="nav-section">
+            <div class="nav-section-title">Dự án Tốt Nghiệp (Vampire Survivors)</div>
+            <ul class="nav-list" id="nav-project">
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_1_core_va_tilemap.md', this)">Phần
+                    1: Core, Camera & Tilemap</li>
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_2_ecs_va_ai.md', this)">Phần 2: ECS
+                    & 1000 Quái vật</li>
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_3_va_cham_va_hieu_ung.md', this)">
+                    Phần 3: Va chạm, Đạn & Hạt</li>
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_4_ui_va_state.md', this)">Phần 4:
+                    Thanh Máu & State Machine</li>
+                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_5_toi_uu_va_build.md', this)">Phần
+                    5: Game Feel & Đóng gói Web</li>
+            </ul>
+        </div>
+</div>
+<div id="tab-lotrinh" class="tab-content">
+<div class="nav-section">
             <div class="nav-section-title">Lộ trình Cơ Bản</div>
             <ul class="nav-list" id="nav-basic">
                 <li class="nav-item" onclick="loadMarkdown('chuong/chuong_1.md', this)">Chương 1: Core & Game Loop</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_2.md', this)">Chương 2: FPS & Basic Shapes</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_3.md', this)">Chương 3: Input & Vector Math</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_4.md', this)">Chương 4: Textures & UI Fonts</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_5.md', this)">Chương 5: Collision & Camera</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_2.md', this)">Chương 2: FPS & Basic Shapes
+                </li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_3.md', this)">Chương 3: Input & Vector Math
+                </li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_4.md', this)">Chương 4: Textures & UI Fonts
+                </li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_5.md', this)">Chương 5: Collision & Camera
+                </li>
                 <li class="nav-item" onclick="loadMarkdown('chuong/chuong_6.md', this)">Chương 6: Audio & Save/Load</li>
             </ul>
         </div>
-
-        <div class="nav-section">
+<div class="nav-section">
             <div class="nav-section-title">Lộ trình Nâng Cao</div>
             <ul class="nav-list" id="nav-advanced">
                 <li class="nav-item" onclick="loadMarkdown('chuong/chuong_7.md', this)">Chương 7: RenderTexture</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_8.md', this)">Chương 8: Blend Modes & Shaders</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_9.md', this)">Chương 9: 9-Patch & Scissor UI</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_10.md', this)">Chương 10: State Machine & Arena</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_8.md', this)">Chương 8: Blend Modes & Shaders
+                </li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_9.md', this)">Chương 9: 9-Patch & Scissor UI
+                </li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_10.md', this)">Chương 10: State Machine &
+                    Arena</li>
             </ul>
         </div>
-
-        <div class="nav-section">
+<div class="nav-section">
             <div class="nav-section-title">Cấp độ Chuyên Gia</div>
             <ul class="nav-list" id="nav-expert">
                 <li class="nav-item" onclick="loadMarkdown('chuong/chuong_11.md', this)">Chương 11: Physics System</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_12.md', this)">Chương 12: ECS Architecture</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_12.md', this)">Chương 12: ECS Architecture
+                </li>
                 <li class="nav-item" onclick="loadMarkdown('chuong/chuong_13.md', this)">Chương 13: Particle System</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_14.md', this)">Chương 14: Tilemap & Culling</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_15.md', this)">Chương 15: Threads & Network</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_14.md', this)">Chương 14: Tilemap & Culling
+                </li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_15.md', this)">Chương 15: Threads & Network
+                </li>
             </ul>
         </div>
-
-        <div class="nav-section">
+<div class="nav-section">
             <div class="nav-section-title">Nghệ thuật Thiết kế</div>
             <ul class="nav-list" id="nav-art">
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_16.md', this)">Chương 16: AI & Pathfinding</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_17.md', this)">Chương 17: Skeletal Animation</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_18.md', this)">Chương 18: Profiling & Optimization</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_19.md', this)">Chương 19: Deployment & WASM</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_16.md', this)">Chương 16: AI & Pathfinding
+                </li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_17.md', this)">Chương 17: Skeletal Animation
+                </li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_18.md', this)">Chương 18: Profiling &
+                    Optimization</li>
+                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_19.md', this)">Chương 19: Deployment & WASM
+                </li>
                 <li class="nav-item" onclick="loadMarkdown('chuong/chuong_20.md', this)">Chương 20: Game Juice</li>
             </ul>
         </div>
-        
-        <div class="nav-section">
-            <div class="nav-section-title">Dự án Tốt Nghiệp (Vampire Survivors)</div>
-            <ul class="nav-list" id="nav-project">
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_1_core_va_tilemap.md', this)">Phần 1: Core, Camera & Tilemap</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_2_ecs_va_ai.md', this)">Phần 2: ECS & 1000 Quái vật</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_3_va_cham_va_hieu_ung.md', this)">Phần 3: Va chạm, Đạn & Hạt</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_4_ui_va_state.md', this)">Phần 4: Thanh Máu & State Machine</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_5_toi_uu_va_build.md', this)">Phần 5: Game Feel & Đóng gói Web</li>
+</div>
+<div id="tab-vande" class="tab-content">
+<div class="nav-section">
+            <div class="nav-section-title">30 Vấn Đề Thực Tế (Troubleshooting)</div>
+            <ul class="nav-list" id="nav-problems">
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_1_ysorting.md', this)">Vấn Đề
+                    1: Y-Sorting</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_2_tilemap_bleeding.md', this)">
+                    Vấn Đề 2: Tilemap Bleeding</li>
+                <li class="nav-item"
+                    onclick="loadMarkdown('problems_and_resolve/problem_3_resolution_scaling.md', this)">Vấn Đề 3: Méo
+                    hình khi Resize</li>
+                <li class="nav-item"
+                    onclick="loadMarkdown('problems_and_resolve/problem_4_collision_tunneling.md', this)">Vấn Đề 4: Đạn
+                    bay xuyên tường</li>
+                <li class="nav-item"
+                    onclick="loadMarkdown('problems_and_resolve/problem_5_diagonal_movement.md', this)">Vấn Đề 5: Đi
+                    chéo bị nhanh hơn</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_6_wall_sticking.md', this)">Vấn
+                    Đề 6: Kẹt vào tường</li>
+                <li class="nav-item"
+                    onclick="loadMarkdown('problems_and_resolve/problem_7_framerate_dependence.md', this)">Vấn Đề 7: Tốc
+                    độ phụ thuộc FPS</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_8_input_dropping.md', this)">
+                    Vấn Đề 8: Rớt phím bấm</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_9_gc_spikes.md', this)">Vấn Đề
+                    9: Lag do Rác bộ nhớ</li>
+                <li class="nav-item"
+                    onclick="loadMarkdown('problems_and_resolve/problem_10_state_management.md', this)">Vấn Đề 10: Code
+                    Mì Ý</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_11_object_pooling.md', this)">
+                    Vấn Đề 11: Lag do Sinh Quái</li>
+                <li class="nav-item"
+                    onclick="loadMarkdown('problems_and_resolve/problem_12_rng_predictability.md', this)">Vấn Đề 12:
+                    Random bị trùng</li>
+                <li class="nav-item"
+                    onclick="loadMarkdown('problems_and_resolve/problem_13_audio_overlapping.md', this)">Vấn Đề 13: Điếc
+                    tai vì Âm thanh</li>
+                <li class="nav-item"
+                    onclick="loadMarkdown('problems_and_resolve/problem_14_ghost_collisions.md', this)">Vấn Đề 14: Kẹt
+                    góc Tilemap</li>
+                <li class="nav-item"
+                    onclick="loadMarkdown('problems_and_resolve/problem_15_pathfinding_bottleneck.md', this)">Vấn Đề 15:
+                    Tràn CPU Tìm đường</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_16_save_corruption.md', this)">
+                    Vấn Đề 16: Hỏng file Save game</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_17_camera_jitter.md', this)">
+                    Vấn Đề 17: Camera bị rung giật</li>
+                <li class="nav-item"
+                    onclick="loadMarkdown('problems_and_resolve/problem_18_ui_click_through.md', this)">Vấn Đề 18: Bấm
+                    xuyên qua UI</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_19_loading_block.md', this)">
+                    Vấn Đề 19: Đứng hình khi Tải</li>
+                <li class="nav-item"
+                    onclick="loadMarkdown('problems_and_resolve/problem_20_floating_point_loss.md', this)">Vấn Đề 20:
+                    Thế giới mở bị lỗi</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_21_memory_fragmentation.md', this)">
+                    Vấn Đề 21: Phân mảnh bộ nhớ</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_22_fixed_update.md', this)">
+                    Vấn Đề 22: Vật lý giật cục</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_23_asset_duplication.md', this)">
+                    Vấn Đề 23: Tràn VRAM do load ảnh</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_24_async_hell.md', this)">
+                    Vấn Đề 24: Kẹt đơ game vòng lặp</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_25_dt_spiral_of_death.md', this)">
+                    Vấn Đề 25: Vòng xoáy tử thần DT</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_26_isometric_zsorting.md', this)">
+                    Vấn Đề 26: Lỗi đè chéo đồ họa</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_27_dangling_pointers.md', this)">
+                    Vấn Đề 27: Con trỏ lơ lửng Crash</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_28_broadphase_missing.md', this)">
+                    Vấn Đề 28: Dư thừa kiểm tra va chạm</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_29_hitbox_hurtbox.md', this)">
+                    Vấn Đề 29: Sát thương khống</li>
+                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_30_ui_anchoring.md', this)">
+                    Vấn Đề 30: UI văng khỏi màn hình</li>
             </ul>
         </div>
-        
-        <div class="nav-section">
+</div>
+<div id="tab-tailieu" class="tab-content">
+<div class="nav-section">
             <div class="nav-section-title">Tài liệu Gốc</div>
             <ul class="nav-list" id="nav-docs">
                 <li class="nav-item" onclick="loadMarkdown('docs.md', this)">Từ điển Raylib Toàn Tập</li>
             </ul>
         </div>
+</div>
     </nav>
 
     <main id="content-wrapper">
@@ -372,7 +574,7 @@
             <button class="hamburger" onclick="toggleSidebar()">☰</button>
             <div class="mobile-title">Raylib Odin</div>
         </div>
-        
+
         <!-- Lớp phủ mờ khi mở Sidebar -->
         <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
@@ -382,12 +584,23 @@
         </div>
         <article id="content">
             <h1>Chào mừng đến với Giáo Trình Raylib Odin!</h1>
-            <p>Hãy chọn một chương ở menu bên trái để bắt đầu đọc. Toàn bộ tài liệu đều hỗ trợ highlight code và giao diện tối mượt mà bảo vệ mắt.</p>
-            <p><em>Lưu ý: Để trình duyệt có quyền đọc các file .md trong máy tính, bạn cần chạy trang web này thông qua một local server (ví dụ như Live Server của VSCode, hoặc gõ lệnh <code>python -m http.server</code> trong terminal).</em></p>
+            <p>Hãy chọn một chương ở menu bên trái để bắt đầu đọc. Toàn bộ tài liệu đều hỗ trợ highlight code và giao
+                diện tối mượt mà bảo vệ mắt.</p>
+            <p><em>Lưu ý: Để trình duyệt có quyền đọc các file .md trong máy tính, bạn cần chạy trang web này thông qua
+                    một local server (ví dụ như Live Server của VSCode, hoặc gõ lệnh <code>python -m http.server</code>
+                    trong terminal).</em></p>
         </article>
     </main>
 
     <script>
+
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
         // Toggle Sidebar on Mobile
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('active');
@@ -403,11 +616,11 @@
         async function loadMarkdown(filePath, navElement) {
             const contentDiv = document.getElementById('content');
             const loader = document.getElementById('loader');
-            
+
             // Xóa active class của tất cả các item
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             // Thêm active class cho item hiện tại
-            if(navElement) navElement.classList.add('active');
+            if (navElement) navElement.classList.add('active');
 
             // Đóng sidebar trên mobile sau khi click
             if (window.innerWidth <= 768) {
@@ -422,20 +635,20 @@
             try {
                 // Fetch file Markdown (yêu cầu local server)
                 const response = await fetch(filePath);
-                
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                
+
                 const markdownText = await response.text();
-                
+
                 // Parse markdown sang HTML
                 const htmlContent = marked.parse(markdownText);
-                
+
                 // Hiển thị nội dung
                 contentDiv.innerHTML = htmlContent;
                 contentDiv.style.display = 'block';
-                
+
                 // Áp dụng Highlight.js thủ công
                 contentDiv.querySelectorAll('pre code').forEach((block) => {
                     // Odin không có sẵn trong Highlight.js gốc, 
@@ -445,7 +658,7 @@
                     }
                     hljs.highlightElement(block);
                 });
-                
+
                 // Reset scroll
                 document.getElementById('content-wrapper').scrollTop = 0;
             } catch (error) {
@@ -479,4 +692,5 @@
         }
     </script>
 </body>
+
 </html>
