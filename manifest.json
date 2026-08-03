@@ -1,0 +1,17 @@
+{
+  "name": "Raylib Odin - Giáo trình Game 2D",
+  "short_name": "Raylib Odin",
+  "description": "Giáo trình học lập trình game 2D bằng Raylib và Odin từ cơ bản đến chuyên gia.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/raysan5/raylib/master/logo/raylib_256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

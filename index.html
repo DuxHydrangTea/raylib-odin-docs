@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raylib Odin - Giáo trình Game 2D</title>
     
+    <!-- PWA Config -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/raysan5/raylib/master/logo/raylib_256x256.png">
+
     <!-- Marked.js để parse Markdown -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
@@ -460,6 +465,17 @@
             } finally {
                 loader.style.display = 'none';
             }
+        }
+
+        // Đăng ký Service Worker cho PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(registration => {
+                    console.log('ServiceWorker đã đăng ký thành công với scope: ', registration.scope);
+                }).catch(err => {
+                    console.log('Đăng ký ServiceWorker thất bại: ', err);
+                });
+            });
         }
     </script>
 </body>
