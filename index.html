@@ -350,6 +350,7 @@
     
         .sidebar-tabs {
             display: flex;
+            flex-wrap: wrap;
             background: #0f172a;
             border-bottom: 1px solid var(--border-color);
             position: sticky;
@@ -357,11 +358,11 @@
             z-index: 40;
         }
         .tab-btn {
-            flex: 1;
+            flex: 1 1 30%;
             background: none;
             border: none;
             color: #94a3b8;
-            padding: 12px 2px;
+            padding: 10px 2px;
             font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
@@ -395,7 +396,9 @@
         <div class="sidebar-tabs">
             <button class="tab-btn active" onclick="switchTab('tab-duan', this)">Dự Án</button>
             <button class="tab-btn" onclick="switchTab('tab-lotrinh', this)">Lộ Trình</button>
-            <button class="tab-btn" onclick="switchTab('tab-vande', this)">Vấn Đề</button>
+            <button class="tab-btn" onclick="switchTab('tab-vande', this)">Lỗi Game</button>
+            <button class="tab-btn" onclick="switchTab('tab-online', this)">K.T Online</button>
+            <button class="tab-btn" onclick="switchTab('tab-online-vande', this)">Lỗi Online</button>
             <button class="tab-btn" onclick="switchTab('tab-tailieu', this)">Tài Liệu</button>
         </div>
 
@@ -477,6 +480,40 @@
                 <li class="nav-item" onclick="loadMarkdown('chuong/chuong_19.md', this)">Chương 19: Deployment & WASM
                 </li>
                 <li class="nav-item" onclick="loadMarkdown('chuong/chuong_20.md', this)">Chương 20: Game Juice</li>
+            </ul>
+        </div>
+        </div>
+</div>
+<div id="tab-online" class="tab-content">
+<div class="nav-section">
+            <div class="nav-section-title">Kỹ Thuật Game Online</div>
+            <ul class="nav-list" id="nav-online">
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_1_co_ban_ve_mang.md', this)">Chương 1: Cơ bản về Mạng</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_2_kien_truc_mang.md', this)">Chương 2: Kiến trúc Mạng</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_3_goi_tin_du_lieu.md', this)">Chương 3: Gói tin Dữ liệu</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_4_lap_trinh_socket.md', this)">Chương 4: Lập trình Socket</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_5_dong_bo_trang_thai.md', this)">Chương 5: Đồng bộ Trạng thái</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_6_du_doan_client.md', this)">Chương 6: Dự đoán Client</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_7_boi_thuong_do_tre.md', this)">Chương 7: Bồi thường Độ trễ</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_8_ngoai_suy.md', this)">Chương 8: Kỹ thuật Ngoại suy</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_9_toi_uu_bang_thong.md', this)">Chương 9: Tối ưu Băng thông</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_10_bao_mat_va_scale.md', this)">Chương 10: Bảo mật & Scale</li>
+                <li class="nav-item" style="margin-top: 10px; border-top: 1px solid #334155; padding-top: 10px; color: #f59e0b;" onclick="loadMarkdown('online_game_techniques/chuong_11_mmo_farm_server.md', this)">Chương 11: MMO Farm - Server</li>
+                <li class="nav-item" style="color: #f59e0b;" onclick="loadMarkdown('online_game_techniques/chuong_12_mmo_farm_chunking.md', this)">Chương 12: MMO Farm - Chunking</li>
+                <li class="nav-item" style="color: #f59e0b;" onclick="loadMarkdown('online_game_techniques/chuong_13_mmo_farm_economy.md', this)">Chương 13: MMO Farm - Kinh Tế</li>
+            </ul>
+        </div>
+</div>
+<div id="tab-online-vande" class="tab-content">
+<div class="nav-section">
+            <div class="nav-section-title">6 Lỗi Game Online Kinh Điển</div>
+            <ul class="nav-list" id="nav-online-problems">
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/problems/problem_1_desync.md', this)">Lỗi 1: Desync (Bất đồng bộ)</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/problems/problem_2_rubberbanding.md', this)">Lỗi 2: Rubber-banding (Giật lùi)</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/problems/problem_3_ghost_bullets.md', this)">Lỗi 3: Ghost Bullets (Đạn ảo)</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/problems/problem_4_nagles_algorithm.md', this)">Lỗi 4: Nagle's Algorithm (Trễ TCP)</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/problems/problem_5_tickrate_drop.md', this)">Lỗi 5: Server Tickrate Drop</li>
+                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/problems/problem_6_nat_traversal.md', this)">Lỗi 6: Không kết nối được P2P</li>
             </ul>
         </div>
 </div>
