@@ -6,6 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raylib Odin - Giáo trình Game 2D</title>
 
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Giáo trình lập trình game 2D toàn tập với Raylib và ngôn ngữ Odin. Bao gồm kỹ thuật lập trình game offline và kiến trúc game online MMO.">
+    <meta name="keywords" content="Raylib, Odin, Lập trình game, Game 2D, Game Online, MMO, Tutorial, Giáo trình">
+    <meta name="author" content="Raylib Odin Tutorial">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://raylib-odin-tutorial.com/">
+    <meta property="og:title" content="Raylib Odin - Giáo trình Game 2D">
+    <meta property="og:description" content="Giáo trình lập trình game 2D toàn tập với Raylib và ngôn ngữ Odin. Bao gồm kỹ thuật lập trình game offline và kiến trúc game online MMO.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/raysan5/raylib/master/logo/raylib_256x256.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://raylib-odin-tutorial.com/">
+    <meta property="twitter:title" content="Raylib Odin - Giáo trình Game 2D">
+    <meta property="twitter:description" content="Giáo trình lập trình game 2D toàn tập với Raylib và ngôn ngữ Odin. Bao gồm kỹ thuật lập trình game offline và kiến trúc game online MMO.">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/raysan5/raylib/master/logo/raylib_256x256.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://www.raylib.com/favicon.ico">
+
     <!-- PWA Config -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f172a">
@@ -400,6 +422,7 @@
             <button class="tab-btn" onclick="switchTab('tab-online', this)">K.T Online</button>
             <button class="tab-btn" onclick="switchTab('tab-online-vande', this)">Lỗi Online</button>
             <button class="tab-btn" onclick="switchTab('tab-tailieu', this)">Tài Liệu</button>
+            <button class="tab-btn" onclick="switchTab('tab-farmer', this)">Avatar 2D</button>
         </div>
 
 <div id="tab-duan" class="tab-content active">
@@ -603,6 +626,55 @@
             </ul>
         </div>
 </div>
+
+<div id="tab-farmer" class="tab-content">
+        <div class="nav-section">
+            <div class="nav-section-title">Phân Hệ 1: Nền Tảng</div>
+            <ul class="nav-list" id="nav-farmer-p1">
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_1_khoi_tao_game_loop.md', this)">Chương 1: Khởi tạo Game Loop</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_2_grid_movement.md', this)">Chương 2: Grid-based Movement</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_3_tilemap_camera.md', this)">Chương 3: Tilemap & Camera</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_4_interaction_system.md', this)">Chương 4: Tương tác Interaction</li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Phân Hệ 2: Trồng Trọt</div>
+            <ul class="nav-list" id="nav-farmer-p2">
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_5_vong_doi_o_dat.md', this)">Chương 5: Vòng đời Ô Đất</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_6_vong_doi_cay_trong.md', this)">Chương 6: Vòng đời Cây Trồng</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_7_suc_khoe_cay.md', this)">Chương 7: Sức khỏe Cây</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_8_vat_pham_nong_nghiep.md', this)">Chương 8: Phân Bón</li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Phân Hệ 3: Chăn Nuôi</div>
+            <ul class="nav-list" id="nav-farmer-p3">
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_9_ai_dong_vat.md', this)">Chương 9: AI Động vật Cơ bản</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_10_cho_an_sinh_san.md', this)">Chương 10: Cho Ăn & Thu Hoạch</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_11_benh_tat_vat_nuoi.md', this)">Chương 11: Bệnh tật Vật nuôi</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_12_ai_cho_canh.md', this)">Chương 12: Chó Canh Nông Trại</li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Phân Hệ 4: Kinh Tế</div>
+            <ul class="nav-list" id="nav-farmer-p4">
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_13_inventory.md', this)">Chương 13: Túi đồ & Hành trang</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_14_cua_hang_npc.md', this)">Chương 14: Cửa Hàng NPC</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_15_he_thong_nang_cap.md', this)">Chương 15: Nâng Cấp Đất</li>
+            </ul>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Phân Hệ 5 & 6: MMO & Polish</div>
+            <ul class="nav-list" id="nav-farmer-p5">
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_16_ket_noi_server.md', this)">Chương 16: Server MMO Base</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_17_nha_hang_xom.md', this)">Chương 17: Thăm Hàng Xóm</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_18_trom_cap_giup_do.md', this)">Chương 18: Trộm Cắp & Giúp Đỡ</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_19_ui_keo_tha.md', this)">Chương 19: UI Kéo Thả (Drag Drop)</li>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_20_hieu_ung_particles.md', this)">Chương 20: Hạt & Âm Thanh</li>
+            </ul>
+        </div>
+</div>
+
     </nav>
 
     <main id="content-wrapper">
