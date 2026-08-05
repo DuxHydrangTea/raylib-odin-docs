@@ -85,16 +85,33 @@ effective_age := (current_time - crop.planted_at) - crop.total_sick_time - curre
 Người chơi cầm cuốc (Nhổ cỏ) hoặc Bình xịt sâu (Xịt sâu) bấm vào cây.
 
 ```odin
-if tool == .HOE && crop.has_weeds {
-    // Chữa khỏi
-    crop.has_weeds = false
+// Cập nhật lại tool_handlers[.HOE] (Đã có ở Chương 5) để hỗ trợ thêm tính năng nhổ cỏ
+tool_handlers[.HOE] = proc(world: ^World, event: InteractEvent) {
+    plot_entity, found := find_plot_at(world, event.target_grid_x, event.target_grid_y)
+    if !found do return
+    plot := &world.farm_plots[plot_entity]
     
-    // Chốt sổ thời gian bị bệnh và cộng dồn vào total_sick_time
-    crop.total_sick_time += (get_current_time() - crop.sick_started_at)
-    crop.sick_started_at = 0
+    // 1. Cày đất trống (Logic cũ)
+    if plot.state == .EMPTY {
+        plot.state = .PLOWED
+        play_sound("hoe_hit.wav")
+    }
     
-    play_sound("weed_pull.wav")
-    // Tương tự cho xịt sâu với tool == BUG_SPRAY
+    // 2. Nhổ cỏ nếu đất đang có cây (Logic mới)
+    if plot.has_plant {
+        crop := &world.crops[plot.plant_entity]
+        if crop.has_weeds {
+            // Chữa khỏi
+            crop.has_weeds = false
+            
+            // Chốt sổ thời gian bị bệnh và cộng dồn vào total_sick_time
+            crop.total_sick_time += (get_current_time() - crop.sick_started_at)
+            crop.sick_started_at = 0
+            
+            play_sound("weed_pull.wav")
+            // Tương tự cho xịt sâu với đăng ký tool_handlers[.BUG_SPRAY]
+        }
+    }
 }
 ```
 

@@ -91,9 +91,12 @@ update_livestock_death :: proc(world: ^World) {
 Khi người chơi cầm `TOOL_VACCINE` và tương tác với con vật bị ốm. Ta sử dụng toán tử Bitwise AND NOT (`&~`) để gỡ bỏ cờ bệnh.
 
 ```odin
-// Xử lý sự kiện (Bên trong event_queue)
-if tool == .VACCINE {
-    // Giả sử ta tìm được Entity con vật nằm trong ô target_grid_x, y
+// Đăng ký Handler Vắc-xin vào init_tool_handlers()
+tool_handlers[.VACCINE] = proc(world: ^World, event: InteractEvent) {
+    // Tìm Entity con vật nằm trong ô target_grid_x, y
+    target_animal_id, found := find_livestock_at(world, event.target_grid_x, event.target_grid_y)
+    if !found do return
+    
     animal := &world.livestock[target_animal_id]
     
     // Kiểm tra xem nó có bị Cúm không
@@ -109,7 +112,7 @@ if tool == .VACCINE {
             animal.last_fed_time = get_current_time()
         }
         
-        remove_item_from_inventory(player_id, ITEM_VACCINE, 1)
+        remove_item_from_inventory(event.entity_id, ITEM_VACCINE, 1)
         play_sound("heal.wav")
     }
 }

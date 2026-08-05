@@ -39,38 +39,57 @@ import "core:fmt"
 
 ToolType :: enum { HOE, WATERING_CAN, SEED, HAND }
 
+// Định nghĩa kiểu Hàm xử lý sự kiện (Function Pointer)
+ActionHandler :: proc(world: ^World, event: InteractEvent)
+
+// Bảng tra cứu (Router) định tuyến công cụ tới đúng hàm xử lý
+tool_handlers: map[ToolType]ActionHandler
+
+// Khởi tạo và đăng ký các hàm xử lý công cụ (Gọi 1 lần duy nhất ở đầu game)
+init_tool_handlers :: proc() {
+    tool_handlers[.HOE] = proc(world: ^World, event: InteractEvent) {
+        plot_entity, found := find_plot_at(world, event.target_grid_x, event.target_grid_y)
+        if !found do return
+        plot := &world.farm_plots[plot_entity]
+        
+        if plot.state == .EMPTY {
+            plot.state = .PLOWED
+            play_sound("hoe_hit.wav")
+        }
+    }
+    
+    tool_handlers[.WATERING_CAN] = proc(world: ^World, event: InteractEvent) {
+        plot_entity, found := find_plot_at(world, event.target_grid_x, event.target_grid_y)
+        if !found do return
+        plot := &world.farm_plots[plot_entity]
+        
+        if plot.state == .PLOWED {
+            plot.state = .WATERED
+            plot.water_dry_time = get_current_time() + 3600 // Đất sẽ khô lại sau 1 tiếng
+            play_sound("water_splash.wav")
+        }
+    }
+    
+    tool_handlers[.SEED] = proc(world: ^World, event: InteractEvent) {
+        plot_entity, found := find_plot_at(world, event.target_grid_x, event.target_grid_y)
+        if !found do return
+        plot := &world.farm_plots[plot_entity]
+        
+        if plot.state == .WATERED && !plot.has_plant {
+            // Logic Gieo hạt sẽ nằm ở Chương 6
+            plant_seed(world, plot_entity, get_equipped_seed_id())
+        }
+    }
+}
+
+// Hệ thống xử lý sự kiện chính (Vô cùng sạch sẽ, loại bỏ hoàn toàn mã mì Ý if-else!)
 process_farming_events :: proc(world: ^World) {
     for event in event_queue {
         tool := get_equipped_tool(world, event.entity_id)
         
-        // Tìm xem ở vị trí grid_x, grid_y có Thực thể Plot nào không
-        plot_entity, found := find_plot_at(world, event.target_grid_x, event.target_grid_y)
-        
-        if found {
-            plot := &world.farm_plots[plot_entity]
-            
-            // State Machine (Máy trạng thái) của Ô đất
-            switch plot.state {
-                
-            case .EMPTY:
-                if tool == .HOE {
-                    plot.state = .PLOWED
-                    play_sound("hoe_hit.wav")
-                }
-                
-            case .PLOWED:
-                if tool == .WATERING_CAN {
-                    plot.state = .WATERED
-                    plot.water_dry_time = get_current_time() + 3600 // Đất sẽ khô lại sau 1 tiếng
-                    play_sound("water_splash.wav")
-                }
-                
-            case .WATERED:
-                if tool == .SEED && !plot.has_plant {
-                    // Logic Gieo hạt sẽ nằm ở Chương 6
-                    plant_seed(world, plot_entity, get_equipped_seed_id())
-                }
-            }
+        // Giao phó sự kiện cho đúng Handler đã được đăng ký
+        if handler, ok := tool_handlers[tool]; ok {
+            handler(world, event)
         }
     }
     // Xóa event queue sau khi xử lý xong

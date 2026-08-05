@@ -39,26 +39,32 @@ CropComponent :: struct {
 Khi người chơi cầm Bao phân bón trên tay và tương tác với một Ô đất đang có Cây.
 
 ```odin
-// Xử lý sự kiện bón phân
-if tool == .FERTILIZER && plot.has_plant {
-    crop := &world.crops[plot.plant_entity]
-    cfg := g_plant_configs[crop.config_id]
-    
-    // Chỉ cho phép bón 1 lần để tránh lạm dụng, và không bón cây đã chín
-    if !crop.is_fertilized && crop.current_phase < (cfg.phases - 1) {
+// Đăng ký Handler Bón Phân vào init_tool_handlers()
+tool_handlers[.FERTILIZER] = proc(world: ^World, event: InteractEvent) {
+    plot_entity, found := find_plot_at(world, event.target_grid_x, event.target_grid_y)
+    if !found do return
+    plot := &world.farm_plots[plot_entity]
+
+    if plot.has_plant {
+        crop := &world.crops[plot.plant_entity]
+        cfg := g_plant_configs[crop.config_id]
         
-        fertilizer_cfg := g_fertilizers[get_equipped_fertilizer_id()]
-        
-        // Tính số giây được trừ đi
-        reduced_seconds := cfg.growth_duration * fertilizer_cfg.time_reduction_percent
-        
-        crop.is_fertilized = true
-        crop.boost_time = reduced_seconds
-        
-        // Trừ vật phẩm khỏi túi đồ người chơi
-        remove_item_from_inventory(player_id, fertilizer_cfg.id, 1)
-        
-        play_sound("fertilizer_sparkle.wav")
+        // Chỉ cho phép bón 1 lần để tránh lạm dụng, và không bón cây đã chín
+        if !crop.is_fertilized && crop.current_phase < (cfg.phases - 1) {
+            
+            fertilizer_cfg := g_fertilizers[get_equipped_fertilizer_id()]
+            
+            // Tính số giây được trừ đi
+            reduced_seconds := cfg.growth_duration * fertilizer_cfg.time_reduction_percent
+            
+            crop.is_fertilized = true
+            crop.boost_time = reduced_seconds
+            
+            // Trừ vật phẩm khỏi túi đồ người chơi
+            remove_item_from_inventory(event.entity_id, fertilizer_cfg.id, 1)
+            
+            play_sound("fertilizer_sparkle.wav")
+        }
     }
 }
 ```

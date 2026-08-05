@@ -84,8 +84,12 @@ update_crop_growth :: proc(world: ^World) {
 Trở lại hàng đợi sự kiện (Interaction Event) ở Chương 5. Khi người chơi nhấn phím (dùng Tay không `tool == HAND`) lên một ô đất đang có Cây chín.
 
 ```odin
-// Xử lý sự kiện (Bên trong event_queue)
-if tool == .HAND {
+// Đăng ký Handler thu hoạch vào init_tool_handlers() (Đã khai báo ở Chương 5)
+tool_handlers[.HAND] = proc(world: ^World, event: InteractEvent) {
+    plot_entity, found := find_plot_at(world, event.target_grid_x, event.target_grid_y)
+    if !found do return
+    plot := &world.farm_plots[plot_entity]
+    
     if plot.has_plant {
         crop := &world.crops[plot.plant_entity]
         cfg := g_plant_configs[crop.config_id]
