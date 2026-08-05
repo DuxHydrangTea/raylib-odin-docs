@@ -46,6 +46,31 @@ ActionHandler :: proc(world: ^World, event: InteractEvent)
 tool_handlers: map[ToolType]ActionHandler
 
 // Khởi tạo và đăng ký các hàm xử lý công cụ (Gọi 1 lần duy nhất ở đầu game)
+
+// --- Helper Functions ---
+find_plot_at :: proc(world: ^World, grid_x, grid_y: int) -> (EntityID, bool) {
+    for i := 0; i < int(world.next_entity_id); i += 1 {
+        // Tìm Entity có cờ FarmPlot và trùng tọa độ
+        if world.mask_farm_plot[i] {
+            pos := world.positions[i]
+            if pos.grid_x == grid_x && pos.grid_y == grid_y {
+                return EntityID(i), true
+            }
+        }
+    }
+    return 0, false
+}
+
+get_equipped_tool :: proc(world: ^World, player_entity: EntityID) -> ToolType {
+    // Truy xuất Inventory của người chơi để xem đang cầm gì trên tay (Mặc định trả về .HOE)
+    return .HOE 
+}
+
+plant_seed :: proc(world: ^World, plot_entity: EntityID, seed_id: int) {
+    // Logic gieo hạt, sinh Entity Cây và gán vào plot (Chi tiết tại Chương 6)
+}
+// ------------------------
+
 init_tool_handlers :: proc() {
     tool_handlers[.HOE] = proc(world: ^World, event: InteractEvent) {
         plot_entity, found := find_plot_at(world, event.target_grid_x, event.target_grid_y)

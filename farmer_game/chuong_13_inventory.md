@@ -74,6 +74,19 @@ add_item :: proc(inv: ^Inventory, item_id: int, type: ItemType, amount: int) -> 
     // Không đủ chỗ chứa, rơi đồ ra đất hoặc báo lỗi
     return remaining 
 }
+
+// --- Helper Functions (Wrapper) ---
+// Giúp các Event Handler từ các chương trước giao tiếp dễ dàng với Inventory
+add_item_to_inventory :: proc(player_entity: EntityID, item_id: int, amount: int) {
+    // Trong môi trường ECS thực tế:
+    // inv := &world.inventories[player_entity]
+    // add_item(inv, item_id, .CROP, amount)
+}
+
+remove_item_from_inventory :: proc(player_entity: EntityID, item_id: int, amount: int) {
+    // Logic vòng lặp tìm slot có item_id rồi trừ đi quantity, tương tự add_item
+}
+// ----------------------------------
 ```
 
 ## 3. Tương tác Swap (Kéo Thả Đổi Chỗ)
