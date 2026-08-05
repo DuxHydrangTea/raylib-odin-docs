@@ -15,13 +15,23 @@ InventorySlot :: struct {
 
 inventory: [INVENTORY_SIZE]InventorySlot
 
+// Bản đồ chứa tên công cụ để vẽ UI (Data-Driven UI)
+tool_names: map[EquipTool]string
+
 // Khởi tạo đồ có sẵn
 init_inventory :: proc() {
     inventory[0] = { .HOE, 1 }
     inventory[1] = { .WATERING_CAN, 1 }
-    inventory[2] = { .SEED, 10 }
-    inventory[3] = { .HAND, 1 } // Bàn tay trống
-    inventory[4] = { .HAND, 0 } // Ô trống
+    inventory[2] = { .SEED_CARROT, 10 }
+    inventory[3] = { .SEED_TOMATO, 10 }
+    inventory[4] = { .HAND, 1 } // Bàn tay trống
+    
+    // Nạp dữ liệu tên công cụ (Thay thế cho các hàm if/else phức tạp)
+    tool_names[.HAND] = "Trong"
+    tool_names[.HOE] = "Cuoc"
+    tool_names[.WATERING_CAN] = "Tuoi"
+    tool_names[.SEED_CARROT] = "Ca rot"
+    tool_names[.SEED_TOMATO] = "Ca chua"
 }
 ```
 
@@ -91,11 +101,8 @@ render_inventory_ui :: proc() {
         rl.DrawRectangle(start_x + i32(i*60), start_y, 50, 50, rl.LIGHTGRAY)
         rl.DrawRectangleLines(start_x + i32(i*60), start_y, 50, 50, rl.DARKGRAY)
         
-        // Vẽ chữ thay cho Icon
-        tool_name := "Trong"
-        if inventory[i].tool == .HOE do tool_name = "Cuoc"
-        if inventory[i].tool == .WATERING_CAN do tool_name = "Tuoi"
-        if inventory[i].tool == .SEED do tool_name = "Hat"
+        // Vẽ chữ thay cho Icon (Truy xuất qua Map tốc độ cực nhanh O(1))
+        tool_name := tool_names[inventory[i].tool]
         
         rl.DrawText(fmt.ctprintf("%s", tool_name), start_x + i32(i*60) + 5, start_y + 15, 10, rl.BLACK)
     }
