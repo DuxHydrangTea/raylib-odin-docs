@@ -8,6 +8,7 @@ Lộ trình được chia thành **6 Phân hệ (20 Chương)**, với tiêu ch�
 - [Chương 1: Khởi tạo kiến trúc dự án và Game Loop](chuong_1_khoi_tao_game_loop.md)
 - [Chương 2: Xây dựng hệ thống Grid-based Movement](chuong_2_grid_movement.md)
 - [Chương 3: Quản lý Tilemap và Camera](chuong_3_tilemap_camera.md)
+- [Chương 3 (Phụ): Khởi tạo Bản Đồ bằng File JSON](chuong_3_phu_load_map_json.md)
 - [Chương 4: Hệ thống Tương tác (Interaction System)](chuong_4_interaction_system.md)
 
 ## Phân Hệ 2: Hệ Thống Trồng Trọt (Farming System)

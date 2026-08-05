@@ -43,10 +43,11 @@ consume_food :: proc(world: ^World, grid_x, grid_y: int) {
     // Trừ 1 food_amount của Feeder tại tọa độ này
 }
 
+// Tra cứu từ CSDL (Data-Driven)
 get_production_time :: proc(animal_type: AnimalType) -> f64 {
-    if animal_type == .COW do return 3600 // Bò vắt sữa 1 tiếng
-    if animal_type == .CHICKEN do return 600 // Gà đẻ trứng 10 phút
-    return 99999
+    // Không dùng if-else (hardcode), trỏ thẳng vào Bảng cấu hình
+    cfg := g_livestock_configs[animal_type]
+    return cfg.production_time
 }
 
 spawn_item_drop :: proc(world: ^World, grid_x, grid_y: int, item_id: int) {
@@ -108,7 +109,7 @@ update_livestock_production :: proc(world: ^World) {
             animal := &world.livestock[i]
             
             if animal.is_producing && !animal.has_product {
-                // Giả sử Bò cần 3600 giây (1 tiếng) để có sữa
+                // Lấy thời gian sản xuất (Production Time) từ Config Data-driven
                 production_time := get_production_time(animal.type) 
                 
                 if current_time - animal.last_fed_time >= production_time {

@@ -30,7 +30,7 @@ Bản đồ có 100 luống đất, ta sẽ tạo 100 Entity mang component `Far
 
 ## 2. Xử lý Tương tác (Xẻng & Bình tưới)
 
-Dựa vào Hàng đợi sự kiện (`InteractEvent`) từ Chương 4, Hệ thống Nông nghiệp sẽ xử lý logic công cụ. Giả sử người chơi có một Component `Inventory` cho biết họ đang cầm vật phẩm gì trên tay.
+Dựa vào Hàng đợi sự kiện (`InteractEvent`) từ Chương 4, Hệ thống Nông nghiệp sẽ xử lý logic công cụ. Dữ liệu công cụ sẽ được truy xuất trực tiếp từ `InventoryComponent` của người chơi (thông qua ô đang được chọn trên Hotbar).
 
 ```odin
 package ecs
@@ -62,8 +62,19 @@ find_plot_at :: proc(world: ^World, grid_x, grid_y: int) -> (EntityID, bool) {
 }
 
 get_equipped_tool :: proc(world: ^World, player_entity: EntityID) -> ToolType {
-    // Truy xuất Inventory của người chơi để xem đang cầm gì trên tay (Mặc định trả về .HOE)
-    return .HOE 
+    // Truy xuất trực tiếp từ InventoryComponent của người chơi
+    // Đọc ô túi đồ đang được chọn (Hotbar)
+    if !world.mask_inventory[player_entity] do return .HAND
+    
+    inv := &world.inventories[player_entity]
+    equipped_item_id := inv.slots[inv.active_hotbar_index].item_id
+    
+    // Tra cứu ID vật phẩm để chuyển đổi thành ToolType (Từ Config Data)
+    if equipped_item_id == ITEM_HOE do return .HOE
+    if equipped_item_id == ITEM_WATERING_CAN do return .WATERING_CAN
+    if is_seed_item(equipped_item_id) do return .SEED
+    
+    return .HAND
 }
 
 plant_seed :: proc(world: ^World, plot_entity: EntityID, seed_id: int) {

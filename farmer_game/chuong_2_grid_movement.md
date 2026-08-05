@@ -95,14 +95,21 @@ process_input :: proc(pos: ^Position, mov: ^MovementComponent) {
         mov.facing = .UP
     }
     
-    // Nếu có bấm phím, khóa trạng thái và thiết lập điểm đến
+    // Nếu có bấm phím, tính toán đích đến
     if dx != 0 || dy != 0 {
-        // Tương lai: Thêm check va chạm (Collision) tại đây
-        // if can_walk(pos.grid_x + dx, pos.grid_y + dy) {...}
+        next_x := pos.grid_x + dx
+        next_y := pos.grid_y + dy
         
-        mov.target_grid_x = pos.grid_x + dx
-        mov.target_grid_y = pos.grid_y + dy
-        mov.is_moving = true
+        // KIỂM TRA VA CHẠM (Grid Collision)
+        // Gọi hàm từ hệ thống Tilemap để kiểm tra cả 2 lớp (Lớp nền và Lớp vật thể)
+        // Chỉ cho phép đi nếu tọa độ nằm trong bản đồ VÀ không bị chặn
+        if is_walkable(next_x, next_y) {
+            mov.target_grid_x = next_x
+            mov.target_grid_y = next_y
+            mov.is_moving = true
+        } else {
+            // Có thể play âm thanh "cộc cộc" khi đâm vào hàng rào
+        }
     }
 }
 ```
