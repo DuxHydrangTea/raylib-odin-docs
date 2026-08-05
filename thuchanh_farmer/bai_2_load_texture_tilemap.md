@@ -14,8 +14,10 @@ TextureID :: enum {
     GRASS,
     DIRT,
     WATERED_DIRT,
-    PLANT_SEED,
-    PLANT_GROWN,
+    SEED_CARROT,
+    GROWN_CARROT,
+    SEED_TOMATO,
+    GROWN_TOMATO,
 }
 
 // Bảng từ điển lưu trữ toàn bộ hình ảnh của game
@@ -42,6 +44,24 @@ init_dummy_textures :: proc() {
     img_watered := rl.GenImageColor(TILE_SIZE, TILE_SIZE, rl.DARKBROWN)
     textures[.WATERED_DIRT] = rl.LoadTextureFromImage(img_watered)
     rl.UnloadImage(img_watered)
+    
+    // Cà rốt: Mầm vàng, Chín cam
+    img_seed_carrot := rl.GenImageColor(TILE_SIZE, TILE_SIZE, rl.YELLOW)
+    textures[.SEED_CARROT] = rl.LoadTextureFromImage(img_seed_carrot)
+    rl.UnloadImage(img_seed_carrot)
+
+    img_grown_carrot := rl.GenImageColor(TILE_SIZE, TILE_SIZE, rl.ORANGE)
+    textures[.GROWN_CARROT] = rl.LoadTextureFromImage(img_grown_carrot)
+    rl.UnloadImage(img_grown_carrot)
+
+    // Cà chua: Mầm lục đậm/lam (để phân biệt), Chín đỏ
+    img_seed_tomato := rl.GenImageColor(TILE_SIZE, TILE_SIZE, rl.SKYBLUE)
+    textures[.SEED_TOMATO] = rl.LoadTextureFromImage(img_seed_tomato)
+    rl.UnloadImage(img_seed_tomato)
+
+    img_grown_tomato := rl.GenImageColor(TILE_SIZE, TILE_SIZE, rl.RED)
+    textures[.GROWN_TOMATO] = rl.LoadTextureFromImage(img_grown_tomato)
+    rl.UnloadImage(img_grown_tomato)
 }
 ```
 
@@ -94,6 +114,9 @@ main :: proc() {
             rl.ClearBackground(rl.BLACK) // Xóa phông
 
             // --- VẼ BẢN ĐỒ ---
+            // Ánh xạ ID Đất sang TextureID (Data-Driven)
+            tile_textures := [2]TextureID{ .GRASS, .DIRT }
+
             for row := 0; row < MAP_HEIGHT; row += 1 {
                 for col := 0; col < MAP_WIDTH; col += 1 {
                     tile_id := map_data[row][col]
@@ -102,11 +125,8 @@ main :: proc() {
                     px := i32(col * TILE_SIZE)
                     py := i32(row * TILE_SIZE)
                     
-                    if tile_id == 0 { // Cỏ
-                        rl.DrawTexture(textures[.GRASS], px, py, rl.WHITE)
-                    } else if tile_id == 1 { // Đất có thể trồng
-                        rl.DrawTexture(textures[.DIRT], px, py, rl.WHITE)
-                    }
+                    // Tra cứu mảng và vẽ trong 1 dòng!
+                    rl.DrawTexture(textures[tile_textures[tile_id]], px, py, rl.WHITE)
                 }
             }
             // ------------------

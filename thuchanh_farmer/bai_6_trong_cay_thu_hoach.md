@@ -3,13 +3,31 @@
 Đây là chương đáng mong đợi nhất. Ta sẽ gieo hạt, dùng hàm `GetTime()` để tính số giây trôi qua, và làm cái cây lớn lên theo thời gian thực (Giống hệt Avatar 2D nhưng ở quy mô mini).
 
 ## 1. Thiết Kế Component Cây Trồng
-Một cái cây cần lưu trữ: Thời điểm gieo hạt (Timestamp), nó lớn mất bao lâu, và nó đang ở giai đoạn (Phase) nào.
+Thay vì hardcode, ta sử dụng **Data-Driven Design** (Bảng dữ liệu) để dễ dàng thêm hàng chục loại hạt giống sau này mà không cần sửa logic.
 
 ```odin
-// Thêm vào khối Khai báo Component ở Bài 3
+// Cấu trúc dữ liệu cấu hình cho 1 loại hạt
+SeedData :: struct {
+    duration: f64,
+    seed_tex: TextureID,
+    grown_tex: TextureID,
+    seed_color: rl.Color,
+    grown_color: rl.Color,
+}
+
+// Từ điển (Map) lưu trữ thông tin mọi loại hạt trong game
+seed_db: map[EquipTool]SeedData
+
+// Khởi tạo ở đầu hàm main()
+init_seed_db :: proc() {
+    seed_db[.SEED_CARROT] = { 10.0, .SEED_CARROT, .GROWN_CARROT, rl.YELLOW, rl.ORANGE }
+    seed_db[.SEED_TOMATO] = { 15.0, .SEED_TOMATO, .GROWN_TOMATO, rl.SKYBLUE, rl.RED }
+}
+
+// Component Cây trồng thực tế
 Crop :: struct {
-    planted_at: f64,       // Số giây tính từ lúc game bật lên
-    growth_duration: f64,  // Mất 10 giây để chín hoàn toàn
+    type: EquipTool,       // Cây đang trồng là loại gì?
+    planted_at: f64,       // Timestamp lúc gieo hạt
     phase: int,            // 0: Hạt mầm, 1: Cây trưởng thành
 }
 
@@ -22,43 +40,42 @@ World :: struct {
 ```
 
 ## 2. Gieo Hạt (Trồng cây)
-Ta thêm một phím mới để đổi sang công cụ Hạt Giống (Seed). Cập nhật hàm `farming_interaction_system` ở Bài 5:
+Cập nhật hàm `farming_interaction_system` ở Bài 5. Ta sẽ kiểm tra `current_tool` có nằm trong `seed_db` hay không thay vì dùng if-else chuỗi:
 
 ```odin
-    EquipTool :: enum { HAND, HOE, WATERING_CAN, SEED }
+    EquipTool :: enum { HAND, HOE, WATERING_CAN, SEED_CARROT, SEED_TOMATO }
     // ...
     
-    // Đang cầm hạt giống và ném vào ô Đất Ướt (2)
-    } else if current_tool == .SEED {
+    // Nếu đang cầm một công cụ CÓ TRONG bảng hạt giống và ném vào Đất Ướt (2)
+    } else if current_tool in seed_db {
         if tile_id == 2 {
-            // Tạm thời đánh dấu ô đất này có cây bằng ID = 3
             map_data[ty][tx] = 3
             
-            // Sinh ra Thực thể Cây Trồng (Entity)
             id := world.next_entity_id
             world.next_entity_id += 1
             
-            // Tọa độ của cây chính là tọa độ ô lưới (tx, ty)
             world.positions[id] = Position { grid_x = tx, grid_y = ty, pixel_x = f32(tx*TILE_SIZE), pixel_y = f32(ty*TILE_SIZE) }
             world.mask_position[id] = true
             
-            // Component Cây
+            // Lấy dữ liệu cấu hình hạt giống từ Map
+            seed_data := seed_db[current_tool]
+
             world.crops[id] = Crop {
+                type = current_tool,
                 planted_at = rl.GetTime(), // Bấm đồng hồ!
-                growth_duration = 10.0,    // Trồng 10 giây là chín
                 phase = 0,
             }
             world.mask_crop[id] = true
             
-            // Gắn hình ảnh Mầm cây (Giả lập bằng màu Vàng ở Bài 2)
-            world.renderables[id] = Renderable { tex_id = .PLANT_SEED, color = rl.YELLOW }
+            // Gắn hình ảnh Mầm cây dựa trên dữ liệu tra cứu được
+            world.renderables[id] = Renderable { tex_id = seed_data.seed_tex, color = seed_data.seed_color }
             world.mask_renderable[id] = true
             
             fmt.println("Da gieo hat!")
         }
     }
 ```
-*(Lưu ý: Mở hàm `init_dummy_textures()` ở Bài 2, sinh thêm ảnh `.PLANT_SEED` (Vàng) và `.PLANT_GROWN` (Đỏ cam) bằng `rl.GenImageColor(TILE_SIZE, TILE_SIZE, rl.YELLOW)` nhé!)*
+*(Lưu ý: Bạn nhớ gọi hàm `init_seed_db()` bên trong hàm `main()` nhé!)*
 
 ## 3. Hệ Thống Sinh Trưởng (Growth System)
 Cây không tự lớn. Ta cần một System chạy mỗi khung hình, lấy Thời gian hiện tại trừ đi Thời gian gieo hạt để tính ra "Tuổi" của cây.
@@ -75,13 +92,16 @@ crop_growth_system :: proc(world: ^World) {
             if crop.phase == 0 {
                 age := current_time - crop.planted_at
                 
+                // Tra cứu thông tin loại cây đang trồng
+                seed_data := seed_db[crop.type]
+                
                 // Nếu tuổi thọ đã vượt quá thời gian sinh trưởng
-                if age >= crop.growth_duration {
+                if age >= seed_data.duration {
                     crop.phase = 1 // Chín!
                     
-                    // Nâng cấp hình ảnh lên cây trưởng thành
-                    world.renderables[i].tex_id = .PLANT_GROWN
-                    world.renderables[i].color = rl.ORANGE
+                    // Nâng cấp hình ảnh lên cây trưởng thành tự động
+                    world.renderables[i].tex_id = seed_data.grown_tex
+                    world.renderables[i].color = seed_data.grown_color
                     
                     fmt.println("Cây đã chín!")
                 }

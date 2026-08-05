@@ -45,45 +45,49 @@ for i := 0; i < world.next_entity_id; i += 1 {
 ```
 
 ## 3. Hệ Thống Tương Tác Nông Trại (Farming System)
-Tạo thêm một Enum cho Công cụ người chơi đang cầm. Giả sử ta đang cầm cái Cuốc.
+Tạo thêm một Enum cho Công cụ người chơi đang cầm. Đồng thời, thay vì hardcode việc công cụ nào tương tác với đất nào (ví dụ Cuốc thì đổi đất 0 thành 1), ta tạo một Bảng Quy Tắc (Data-Driven Rules) để dễ dàng thêm công cụ mới.
 
 ```odin
 EquipTool :: enum { HAND, HOE, WATERING_CAN }
 current_tool: EquipTool = .HOE // Tạm hardcode để test
+
+// Quy tắc tương tác đất đai
+ToolRule :: struct {
+    req_tile: int,  // Yêu cầu ID đất đầu vào
+    res_tile: int,  // Biến thành ID đất đầu ra
+}
+
+// Bảng từ điển quy luật
+tool_rules: map[EquipTool]ToolRule
+
+// Khởi tạo quy luật (gọi trong hàm main hoặc init)
+init_tool_rules :: proc() {
+    tool_rules[.HOE] = {0, 1}           // Cuốc: Cỏ (0) -> Đất tơi (1)
+    tool_rules[.WATERING_CAN] = {1, 2}  // Bình tưới: Đất tơi (1) -> Đất ướt (2)
+}
 ```
 
-Hệ thống xử lý nút `Space` sẽ can thiệp trực tiếp vào mảng 2D `map_data`. (Ở Bài 2 ta đã quy định: `0` là cỏ, `1` là đất).
-Ta thêm luật mới: `2` là đất đã tưới (Màu nâu đậm).
+Hệ thống xử lý nút `Space` sẽ tra cứu quy tắc này để can thiệp vào `map_data`.
 
 ```odin
 farming_interaction_system :: proc(world: ^World) {
     if rl.IsKeyPressed(.SPACE) {
-        // Tìm player
         for i := 0; i < world.next_entity_id; i += 1 {
             if world.mask_player[i] {
                 pos := world.positions[i]
                 mov := world.movements[i]
                 
-                // Lấy tọa độ đích
                 tx, ty := get_facing_tile(pos, mov)
-                
-                // Nếu vượt ra khỏi bản đồ thì bỏ qua
                 if tx < 0 || tx >= MAP_WIDTH || ty < 0 || ty >= MAP_HEIGHT do return
                 
                 tile_id := map_data[ty][tx] // Chú ý: map_data[Y][X] vì khai báo [Row][Col]
                 
-                // Máy trạng thái (State Machine) của đất
-                if current_tool == .HOE {
-                    // Cuốc cỏ (0) thành Đất tơi xốp (1)
-                    if tile_id == 0 {
-                        map_data[ty][tx] = 1 
-                        fmt.println("Da cuoc dat!")
-                    }
-                } else if current_tool == .WATERING_CAN {
-                    // Tưới Đất tơi (1) thành Đất ướt (2)
-                    if tile_id == 1 {
-                        map_data[ty][tx] = 2
-                        fmt.println("Da tuoi nuoc!")
+                // Tra cứu quy luật dựa trên công cụ đang cầm
+                if rule, ok := tool_rules[current_tool]; ok {
+                    // Nếu điều kiện ô đất khớp với luật
+                    if tile_id == rule.req_tile {
+                        map_data[ty][tx] = rule.res_tile // Đổi loại đất!
+                        fmt.println("Tương tác thành công!")
                     }
                 }
             }
@@ -91,19 +95,17 @@ farming_interaction_system :: proc(world: ^World) {
     }
 }
 ```
+*(Lưu ý: Đừng quên gọi hàm `init_tool_rules()` ở đầu hàm `main()` nhé)*
 
 ## 4. Tích hợp và Đổi màu vẽ
 Sửa đoạn code Render bản đồ ở hàm `main()` (Bài 2) để hỗ trợ vẽ thêm Đất Ướt (2):
 
 ```odin
-// ... (Render Map vòng lặp Row Col) ...
-if tile_id == 0 { 
-    rl.DrawTexture(textures[.GRASS], px, py, rl.WHITE)
-} else if tile_id == 1 { 
-    rl.DrawTexture(textures[.DIRT], px, py, rl.WHITE)
-} else if tile_id == 2 { // CẬP NHẬT MỚI: Đất Ướt
-    rl.DrawTexture(textures[.WATERED_DIRT], px, py, rl.WHITE)
-}
+// ... Cập nhật mảng tile_textures (Thêm hỗ trợ đất ướt)
+tile_textures := [4]TextureID{ .GRASS, .DIRT, .WATERED_DIRT, .WATERED_DIRT } // ID 3 dành cho Đất đang trồng cây ở bài sau
+
+// ... Vòng lặp vẽ vẫn giữ nguyên 1 dòng cực kỳ ngắn gọn!
+rl.DrawTexture(textures[tile_textures[tile_id]], px, py, rl.WHITE)
 ```
 
 Đừng quên thêm lệnh gọi `farming_interaction_system(&game_world)` vào Game Loop, nằm dưới phần gọi `player_input_system`.
