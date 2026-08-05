@@ -703,6 +703,9 @@
                 <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_18_trom_cap_giup_do.md', this)">Chương 18: Trộm Cắp & Giúp Đỡ</li>
                 <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_19_ui_keo_tha.md', this)">Chương 19: UI Kéo Thả (Drag Drop)</li>
                 <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_20_hieu_ung_particles.md', this)">Chương 20: Hạt & Âm Thanh</li>
+                
+                <h2 class="nav-category">Đặc Biệt</h2>
+                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_21_full_source_code.md', this)">Chương 21: Full Source Code</li>
             </ul>
         </div>
 </div>
@@ -761,7 +764,19 @@
             // Xóa active class của tất cả các item
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             // Thêm active class cho item hiện tại
-            if (navElement) navElement.classList.add('active');
+            if (navElement) {
+                navElement.classList.add('active');
+            } else {
+                document.querySelectorAll('.nav-item').forEach(el => {
+                    const onclickStr = el.getAttribute('onclick');
+                    if (onclickStr && onclickStr.includes(filePath)) {
+                        el.classList.add('active');
+                    }
+                });
+            }
+
+            // Lưu trạng thái vào URL hash
+            window.location.hash = filePath;
 
             // Đóng sidebar trên mobile sau khi click
             if (window.innerWidth <= 768) {
@@ -789,6 +804,15 @@
                 // Hiển thị nội dung
                 contentDiv.innerHTML = htmlContent;
                 contentDiv.style.display = 'block';
+
+                // Cập nhật heading của sidebar theo tiêu đề bài đọc
+                const firstHeading = contentDiv.querySelector('h1, h2');
+                const sidebarTitle = document.querySelector('.sidebar-header h1');
+                if (firstHeading && sidebarTitle) {
+                    sidebarTitle.innerHTML = `<i class="fas fa-book"></i> ${firstHeading.innerText}`;
+                } else if (navElement && sidebarTitle) {
+                    sidebarTitle.innerHTML = `<i class="fas fa-book"></i> ${navElement.innerText}`;
+                }
 
                 // Thêm nút Copy cho các block code
                 contentDiv.querySelectorAll('pre').forEach((pre) => {
@@ -837,6 +861,14 @@
                 loader.style.display = 'none';
             }
         }
+
+        // Khôi phục lại bài đọc từ Hash URL (Khi người dùng nhấn F5)
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1); // Bỏ dấu #
+            if (hash && hash.endsWith('.md')) {
+                loadMarkdown(hash, null);
+            }
+        });
 
         // Đăng ký Service Worker cho PWA
         if ('serviceWorker' in navigator) {

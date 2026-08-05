@@ -22,6 +22,38 @@ FeederComponent :: struct {
 Trong Chương 9, ở hàm `choose_next_state`, chúng ta đã để ngỏ phần code nếu con vật đói (`hunger < 30`). Bây giờ ta sẽ điền logic tìm đường tới Máng ăn.
 
 ```odin
+// --- Helper Functions (AI & Sinh Sản) ---
+find_nearest_feeder_with_food :: proc(world: ^World, animal_type: AnimalType) -> (int, int) {
+    // Logic quét tất cả feeder, lọc theo food_type phù hợp với animal_type,
+    // tính khoảng cách Manhattan và trả về tọa độ (grid_x, grid_y).
+    // Nếu không có, trả về (-1, -1)
+    return -1, -1 // Giả lập mã giả
+}
+
+calculate_next_step_towards :: proc(curr_x, curr_y, target_x, target_y: int) -> (int, int) {
+    // Di chuyển 1 ô về phía mục tiêu (Ưu tiên trục X trước)
+    if curr_x < target_x do return curr_x + 1, curr_y
+    if curr_x > target_x do return curr_x - 1, curr_y
+    if curr_y < target_y do return curr_x, curr_y + 1
+    if curr_y > target_y do return curr_x, curr_y - 1
+    return curr_x, curr_y
+}
+
+consume_food :: proc(world: ^World, grid_x, grid_y: int) {
+    // Trừ 1 food_amount của Feeder tại tọa độ này
+}
+
+get_production_time :: proc(animal_type: AnimalType) -> f64 {
+    if animal_type == .COW do return 3600 // Bò vắt sữa 1 tiếng
+    if animal_type == .CHICKEN do return 600 // Gà đẻ trứng 10 phút
+    return 99999
+}
+
+spawn_item_drop :: proc(world: ^World, grid_x, grid_y: int, item_id: int) {
+    // Khởi tạo Entity mới mang component ItemDrop rớt trên đất
+}
+// ----------------------------------------
+
 // Tìm máng ăn gần nhất có thức ăn
 target_feeder_grid_x, target_feeder_grid_y := find_nearest_feeder_with_food(world, animal.type)
 

@@ -35,3 +35,6 @@ Lộ trình được chia thành **6 Phân hệ (20 Chương)**, với tiêu ch�
 ## Phân Hệ 6: Đánh Bóng & Trải Nghiệm (Polish & UI)
 - [Chương 19: Hệ thống UI kéo thả](chuong_19_ui_keo_tha.md)
 - [Chương 20: Hiệu ứng hạt (Particles) và Âm thanh](chuong_20_hieu_ung_particles.md)
+
+## Phân Hệ Đặc Biệt
+- [Chương 21: Full Source Code (Tổng Hợp)](chuong_21_full_source_code.md)
