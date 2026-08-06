@@ -122,6 +122,114 @@ play_sound :: proc(name: string) {
 }
 ```
 
-Và thế là xong! Tác phẩm **Nông Trại Avatar 2D** của bạn nay đã mang một dáng vẻ Chuyên Nghiệp. Khi cuốc đất, âm thanh "Xoạch" vang lên đồng thời những hạt đất văng tung tóe ra xung quanh. Cây lớn, bạn nhặt nông sản, màn hình thả xuống một túi vàng chói lọi.
+## 5. Bươm Bướm Bay Dập Dờn (Butterflies)
 
-**Lời kết:** Bạn đã nắm trong tay lộ trình và kiến trúc chuẩn chỉ nhất để tái tạo huyền thoại Avatar. Từ Data-driven ECS, thuật toán Culling bản đồ, cho đến Khóa Mutex đồng bộ Trộm Cắp. Hãy mở `main.odin` lên và bắt đầu hành trình ngay thôi!
+Bươm bướm bay lượn trên bản đồ giúp game trông "sống" hơn rất nhiều. Ta không cần AI phức tạp, chỉ cần dùng hàm lượng giác `math.sin()` để tạo quỹ đạo bay chập chờn.
+
+```odin
+Butterfly :: struct {
+    x, y: f32,
+    base_y: f32,       // Trục Y gốc để lượn sóng
+    speed: f32,
+    time_offset: f32,  // Lệch pha để các con bướm không bay giống hệt nhau
+    color: rl.Color,
+}
+
+butterflies: [20]Butterfly
+
+init_butterflies :: proc() {
+    import "core:math/rand"
+    for i in 0..<20 {
+        b := &butterflies[i]
+        b.x = rand.float32() * 800.0 // MAP_WIDTH
+        b.base_y = rand.float32() * 600.0 // MAP_HEIGHT
+        b.speed = rand.float32() * 20.0 + 10.0
+        b.time_offset = rand.float32() * 100.0
+        
+        // Random màu bướm (trắng, vàng nhạt, xanh lơ)
+        colors := [3]rl.Color{ rl.WHITE, rl.YELLOW, rl.SKYBLUE }
+        b.color = colors[rand.int31_max(3)]
+    }
+}
+
+update_butterflies :: proc(dt: f32, global_time: f32) {
+    import "core:math"
+    
+    for i in 0..<20 {
+        b := &butterflies[i]
+        
+        // Bay từ trái sang phải
+        b.x += b.speed * dt
+        
+        // Nếu bay ra khỏi màn hình thì vòng lại bên trái
+        if b.x > 800.0 {
+            b.x = -10.0
+            b.base_y = rand.float32() * 600.0
+        }
+        
+        // Lượn sóng hình Sin
+        // Biên độ lượn là 15 pixels, tốc độ vỗ cánh phụ thuộc global_time
+        wave := math.sin((global_time + b.time_offset) * 5.0) * 15.0
+        b.y = b.base_y + wave
+    }
+}
+
+render_butterflies :: proc() {
+    for i in 0..<20 {
+        b := &butterflies[i]
+        // Vẽ 1 hình vuông nhỏ 2x2 pixel giả làm con bướm
+        rl.DrawRectangleV(rl.Vector2{b.x, b.y}, rl.Vector2{2, 2}, b.color)
+    }
+}
+```
+
+## 6. Hiệu Ứng Lá Rơi (Falling Leaves)
+
+Khi nhân vật chặt cây hoặc có gió thổi, một vài chiếc lá rơi lả tả xuống đất sẽ tạo cảm giác rất thơ mộng. Ta có thể dùng lại hệ thống `particle_pool` ở trên nhưng tinh chỉnh lại gia tốc `vy` (cho rơi thật chậm) và dùng `sin()` để lá lắc lư trái phải.
+
+```odin
+spawn_falling_leaves :: proc(tree_x: f32, tree_y: f32) {
+    import "core:math/rand"
+    
+    for i := 0; i < 5; i += 1 {
+        if particle_count >= 5000 do break
+        
+        p := &particle_pool[particle_count]
+        // Bắt đầu từ tán cây
+        p.x = tree_x + (rand.float32() - 0.5) * 40.0
+        p.y = tree_y - 60.0 + (rand.float32() - 0.5) * 20.0 
+        
+        p.vx = 0 // Sẽ bị tác động bởi lực gió lúc update
+        p.vy = rand.float32() * 15.0 + 5.0 // Rơi rất chậm (5 -> 20 pixels/s)
+        
+        p.life = rand.float32() * 3.0 + 2.0 // Bay lơ lửng trong 2-5 giây
+        p.size = 3.0
+        p.color = rl.LIME // Màu xanh lá non
+        
+        particle_count += 1
+    }
+}
+```
+
+Đồng thời trong hàm `update_particles(dt)`, ta thêm một thủ thuật nhỏ: Hạt nào rơi càng chậm (như chiếc lá) thì càng chịu tác động của lực cản không khí và lắc lư:
+
+```odin
+    // Bên trong vòng lặp update_particles (dòng 69, thay thế logic trọng lực)
+    p.x += p.vx * dt
+    p.y += p.vy * dt
+    
+    if p.vy > 0 && p.vy < 30.0 { 
+        // Đích thị là lá rơi, lắc lư trái phải bằng hình sin của thời gian sống
+        import "core:math"
+        p.x += math.sin(p.life * 8.0) * 30.0 * dt
+    } else {
+        // Đất đá văng thì rơi nhanh xuống
+        p.vy += 200.0 * dt
+    }
+```
+
+---
+
+Và thế là xong! Tác phẩm **Nông Trại Avatar 2D** của bạn nay đã mang một dáng vẻ vô cùng Chuyên Nghiệp. Khi cuốc đất, âm thanh "Xoạch" vang lên đồng thời những hạt đất văng tung tóe ra xung quanh. Có những chú bướm chập chờn bay quanh các luống hoa, và thỉnh thoảng một cơn gió lướt qua làm vài chiếc lá rơi lả tả.
+
+**Lời kết:** Bạn đã nắm trong tay lộ trình và kiến trúc chuẩn chỉ nhất để tái tạo huyền thoại Avatar. Từ Data-driven ECS, thuật toán Culling bản đồ, cho đến Khóa Mutex đồng bộ Trộm Cắp và các thủ thuật thổi hồn vào game. Hãy mở file code lên và bắt đầu hành trình ngay thôi!
