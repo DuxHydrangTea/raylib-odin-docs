@@ -676,6 +676,7 @@
             <button class="tab-btn" onclick="switchTab('tab-ninja', this)">Ninja</button>
             <button class="tab-btn" onclick="switchTab('tab-odin', this)">Odin</button>
             <button class="tab-btn" onclick="switchTab('tab-nextjs', this)" style="color: #10b981;">Next.js</button>
+            <button class="tab-btn" onclick="switchTab('tab-reactjs', this)" style="color: #61dafb;">ReactJS</button>
         </div>
 
 <div id="tab-duan" class="tab-content active">
@@ -1101,6 +1102,63 @@
                 <li class="nav-item" onclick="loadMarkdown('next_react_js/07_chuong_7_toi_uu_hoa_seo.md', this)">Chương 7: Tối ưu hóa & SEO</li>
                 <li class="nav-item" onclick="loadMarkdown('next_react_js/10_chuong_10_deployment.md', this)">Chương 10: Triển khai & Docker</li>
                 <li class="nav-item" onclick="loadMarkdown('next_react_js/11_chuong_11_capstone_projects.md', this)">Chương 11: Dự án Capstone</li>
+            </ul>
+        </div>
+</div>
+
+<div id="tab-reactjs" class="tab-content">
+        <div class="sidebar-header">
+            <h1 style="color: #61dafb;"><i class="fab fa-react"></i> ReactJS Enterprise</h1>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Phần 1: Kiến Trúc & Tư Duy</div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="loadMarkdown('reactjs/00_muc_luc.md', this)">Giới thiệu & Lộ trình</li>
+                <li class="nav-item" onclick="loadMarkdown('reactjs/01_chuong_1_to_chuc_thu_muc.md', this)">Chương 1: Tổ chức thư mục chuẩn Enterprise</li>
+                <li class="nav-item" onclick="loadMarkdown('reactjs/02_chuong_2_tu_duy_component_solid.md', this)">Chương 2: Tư duy Component hóa & SOLID</li>
+            </ul>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Phần 2: Quản Lý Trạng Thái</div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="loadMarkdown('reactjs/03_chuong_3_quan_ly_state.md', this)">Chương 3: State Management Hiện Đại</li>
+                <li class="nav-item" onclick="loadMarkdown('reactjs/04_chuong_4_global_state_zustand_redux.md', this)">Chương 4: Global State (Zustand/RTK)</li>
+                <li class="nav-item" onclick="loadMarkdown('reactjs/05_chuong_5_server_state_react_query.md', this)">Chương 5: Server State với React Query</li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Phần 3: Routing & Form</div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="loadMarkdown('reactjs/06_chuong_6_routing_react_router.md', this)">Chương 6: Routing với React Router v6+</li>
+                <li class="nav-item" onclick="loadMarkdown('reactjs/07_chuong_7_form_rhf_zod.md', this)">Chương 7: Form chuẩn với RHF & Zod</li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Phần 4: Hiệu Năng & Dữ Liệu Lớn</div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="loadMarkdown('reactjs/08_chuong_8_toi_uu_hieu_nang.md', this)">Chương 8: Tối ưu hiệu năng (Memoization)</li>
+                <li class="nav-item" onclick="loadMarkdown('reactjs/09_chuong_9_code_splitting_virtualization.md', this)">Chương 9: Code Splitting & Virtualization</li>
+                <li class="nav-item" onclick="loadMarkdown('reactjs/10_chuong_10_concurrent_react_18.md', this)">Chương 10: Sức mạnh Concurrent React 18</li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Phần 5: UI/UX & Testing</div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="loadMarkdown('reactjs/11_chuong_11_design_system_storybook.md', this)">Chương 11: Design System (Radix, Tailwind)</li>
+                <li class="nav-item" onclick="loadMarkdown('reactjs/12_chuong_12_testing_vitest_playwright.md', this)">Chương 12: Testing (Vitest, Playwright)</li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Phần 6: Bảo Mật & CI/CD</div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="loadMarkdown('reactjs/13_chuong_13_bao_mat_frontend.md', this)">Chương 13: Bảo mật Frontend (XSS, CSRF)</li>
+                <li class="nav-item" onclick="loadMarkdown('reactjs/14_chuong_14_docker_ci_cd.md', this)">Chương 14: Docker, Nginx & CI/CD</li>
             </ul>
         </div>
 </div>
