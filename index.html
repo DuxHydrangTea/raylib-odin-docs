@@ -37,10 +37,46 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <!-- Highlight.js để tô màu code -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/tokyo-night-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/dracula.min.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        // Custom Highlight.js for Odin language (Matching the screenshot theme)
+        hljs.registerLanguage('odin', function(e) {
+            return {
+                name: 'Odin',
+                aliases: ['odin'],
+                keywords: {
+                    keyword: 'import package when if else for switch in do case cast auto_cast defer return break continue fallthrough using inline no_inline context foreign proc struct union enum bit_set map dynamic',
+                    literal: 'true false nil',
+                    built_in: 'len cap size_of align_of offset_of type_of type_info_of new make free delete append pop clear',
+                    type: 'int f32 f64 bool string cstring byte u8 u16 u32 u64 i8 i16 i32 i64 any typeid'
+                },
+                contains: [
+                    e.C_LINE_COMMENT_MODE,
+                    e.C_BLOCK_COMMENT_MODE,
+                    e.QUOTE_STRING_MODE,
+                    e.C_NUMBER_MODE,
+                    {
+                        className: 'operator',
+                        begin: /:=|::|\+|-|\*|\/|%|==|!=|>|<|>=|<=|&&|\|\||!|\+=|-=|\*=/
+                    },
+                    {
+                        className: 'type',
+                        begin: /\b[A-Z][a-zA-Z0-9_]*\b/
+                    },
+                    {
+                        className: 'title.function.invoke',
+                        begin: /\b[a-zA-Z_]\w*(?=\s*\()/
+                    },
+                    {
+                        className: 'property', // Dành cho 'fmt' trong 'fmt.println'
+                        begin: /\b[a-zA-Z_]\w*(?=\.)/
+                    }
+                ]
+            };
+        });
+    </script>
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
@@ -521,6 +557,7 @@
             <button class="tab-btn" onclick="switchTab('tab-tailieu', this)">Tài Liệu</button>
             <button class="tab-btn" onclick="switchTab('tab-farmer', this)">Avatar 2D</button>
             <button class="tab-btn" onclick="switchTab('tab-ninja', this)">Ninja</button>
+            <button class="tab-btn" onclick="switchTab('tab-odin', this)">Odin</button>
         </div>
 
 <div id="tab-duan" class="tab-content active">
@@ -845,6 +882,62 @@
         </div>
 </div>
 
+<div id="tab-odin" class="tab-content">
+        <div class="sidebar-header">
+            <h1 style="color: #3b82f6;"><i class="fas fa-book-open"></i> Odin: 0 to Hero</h1>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Phần 1: Nhập môn</div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/muc_luc.md', this)">Giới thiệu & Mục lục</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_1_gioi_thieu_va_cai_dat.md', this)">Chương 1: Giới thiệu & Cài đặt</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_2_bien_hang_va_kieu_du_lieu.md', this)">Chương 2: Biến, Hằng số & Kiểu DL</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_3_toan_tu_va_ep_kieu.md', this)">Chương 3: Toán tử & Ép kiểu</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_4_cau_truc_dieu_khien.md', this)">Chương 4: Cấu trúc điều khiển</li>
+            </ul>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Phần 2: CTDL & Hàm</div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_5_mang_slice_chuoi.md', this)">Chương 5: Mảng, Slice & Chuỗi</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_6_ham_va_defer.md', this)">Chương 6: Hàm & Defer</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_7_struct_union_enum.md', this)">Chương 7: Struct, Union, Enum</li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Phần 3: Bộ nhớ & Con trỏ</div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_8_con_tro.md', this)">Chương 8: Con trỏ</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_9_quan_ly_bo_nho.md', this)">Chương 9: Stack vs Heap</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_10_he_thong_context.md', this)">Chương 10: Hệ thống Context</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_11_cau_truc_du_lieu_dong.md', this)">Chương 11: Mảng động & Map</li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Phần 4: Nâng cao</div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_12_allocators.md', this)">Chương 12: Allocators & Arena</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_13_da_luong.md', this)">Chương 13: Đa luồng (Threading)</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_14_bitwise_dod.md', this)">Chương 14: Bitwise & DOD</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_15_c_interop.md', this)">Chương 15: Giao tiếp với C</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_16_reflection.md', this)">Chương 16: Polymorphism & Reflection</li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Phần 5: Tổ chức dự án</div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_17_packages_scope.md', this)">Chương 17: Packages & Scope</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_18_xu_ly_loi.md', this)">Chương 18: Xử lý lỗi</li>
+                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_19_testing.md', this)">Chương 19: Viết Test (Testing)</li>
+            </ul>
+        </div>
+</div>
+
     </nav>
 
     <main id="content-wrapper">
@@ -1040,11 +1133,6 @@
 
                 // Áp dụng Highlight.js thủ công
                 contentDiv.querySelectorAll('pre code').forEach((block) => {
-                    // Odin không có sẵn trong Highlight.js gốc, 
-                    // chúng ta ánh xạ tạm sang Go (có cú pháp khá giống) để tô màu cho đẹp.
-                    if (block.classList.contains('language-odin')) {
-                        block.classList.replace('language-odin', 'language-go');
-                    }
                     hljs.highlightElement(block);
                 });
 
