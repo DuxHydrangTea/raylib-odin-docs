@@ -538,6 +538,47 @@
             color: var(--accent-color);
         }
 
+        /* Nav Next/Prev Buttons */
+        .nav-buttons-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            gap: 15px;
+        }
+        .nav-next-prev-btn {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            max-width: 48%;
+            text-align: left;
+        }
+        .nav-next-prev-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+        .nav-next-prev-btn span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .nav-next-btn {
+            margin-left: auto; /* Đẩy sang phải nếu không có nút prev */
+            text-align: right;
+            justify-content: flex-end;
+        }
+
     </style>
 </head>
 
@@ -1136,7 +1177,47 @@
                     hljs.highlightElement(block);
                 });
 
+                // --- Xây dựng nút Next / Prev ---
+                const activeNavItem = document.querySelector('.nav-item.active');
+                if (activeNavItem) {
+                    const parentTab = activeNavItem.closest('.tab-content');
+                    if (parentTab) {
+                        const navItems = Array.from(parentTab.querySelectorAll('.nav-item'));
+                        const activeIndex = navItems.indexOf(activeNavItem);
+                        
+                        if (activeIndex !== -1) {
+                            const navButtonsDiv = document.createElement('div');
+                            navButtonsDiv.className = 'nav-buttons-container';
+
+                            // Nút Prev
+                            if (activeIndex > 0) {
+                                const prevItem = navItems[activeIndex - 1];
+                                const prevBtn = document.createElement('button');
+                                prevBtn.className = 'nav-next-prev-btn';
+                                prevBtn.innerHTML = `<i class="fas fa-arrow-left"></i> <span>Bài trước: ${prevItem.innerText}</span>`;
+                                prevBtn.onclick = () => prevItem.click();
+                                navButtonsDiv.appendChild(prevBtn);
+                            } else {
+                                navButtonsDiv.appendChild(document.createElement('div')); // Spacer
+                            }
+
+                            // Nút Next
+                            if (activeIndex < navItems.length - 1) {
+                                const nextItem = navItems[activeIndex + 1];
+                                const nextBtn = document.createElement('button');
+                                nextBtn.className = 'nav-next-prev-btn nav-next-btn';
+                                nextBtn.innerHTML = `<span>Bài tiếp: ${nextItem.innerText}</span> <i class="fas fa-arrow-right"></i>`;
+                                nextBtn.onclick = () => nextItem.click();
+                                navButtonsDiv.appendChild(nextBtn);
+                            }
+
+                            contentDiv.appendChild(navButtonsDiv);
+                        }
+                    }
+                }
+
                 // Reset scroll
+
                 document.getElementById('content-wrapper').scrollTop = 0;
             } catch (error) {
                 console.error("Lỗi tải file:", error);
