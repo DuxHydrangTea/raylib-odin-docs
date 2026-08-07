@@ -48,36 +48,68 @@
     <script>
         // Custom Highlight.js for Odin language (Matching the screenshot theme)
         hljs.registerLanguage('odin', function (e) {
+            const KEYWORDS = {
+                keyword: 'import package when if else for switch in do case cast auto_cast defer return break continue fallthrough using inline no_inline context foreign proc struct union enum bit_set map dynamic',
+                literal: 'true false nil',
+                built_in: 'len cap size_of align_of offset_of type_of type_info_of new make free delete append pop clear',
+                type: 'int f32 f64 bool string cstring byte u8 u16 u32 u64 i8 i16 i32 i64 any typeid'
+            };
+
+            const NUMBERS = {
+                className: 'number',
+                variants: [
+                    { begin: e.C_NUMBER_RE + '[i|u|f]*' }, // covers 123, 1.23, 123f32
+                ],
+                relevance: 0
+            };
+
+            const STRINGS = {
+                className: 'string',
+                variants: [
+                    e.QUOTE_STRING_MODE,
+                    { begin: '`', end: '`' }
+                ]
+            };
+
+            const OPERATORS = {
+                className: 'keyword', // Trick for Pink color in Dracula
+                begin: /:=|::|->|\+|-|\*|\/|%|==|!=|>|<|>=|<=|&&|\|\||!|\+=|-=|\*=|=/
+            };
+
+            const IDENT_BEFORE_COLON = {
+                className: 'title.class', // Cyan
+                begin: /\b[a-zA-Z_]\w*(?=\s*:)/
+            };
+
+            const PACKAGE_PREFIX = {
+                className: 'built_in', // Cyan
+                begin: /\b[a-zA-Z_]\w*(?=\s*\.)/
+            };
+
+            const FUNC_INVOKE = {
+                className: 'title.function', // Green
+                begin: /\b[a-zA-Z_]\w*(?=\s*\()/
+            };
+
+            const CUSTOM_TYPES = {
+                className: 'type', // Cyan
+                begin: /\b[A-Z][a-zA-Z0-9_]*\b/
+            };
+
             return {
                 name: 'Odin',
                 aliases: ['odin'],
-                keywords: {
-                    keyword: 'import package when if else for switch in do case cast auto_cast defer return break continue fallthrough using inline no_inline context foreign proc struct union enum bit_set map dynamic',
-                    literal: 'true false nil',
-                    built_in: 'len cap size_of align_of offset_of type_of type_info_of new make free delete append pop clear',
-                    type: 'int f32 f64 bool string cstring byte u8 u16 u32 u64 i8 i16 i32 i64 any typeid'
-                },
+                keywords: KEYWORDS,
                 contains: [
                     e.C_LINE_COMMENT_MODE,
                     e.C_BLOCK_COMMENT_MODE,
-                    e.QUOTE_STRING_MODE,
-                    e.C_NUMBER_MODE,
-                    {
-                        className: 'operator',
-                        begin: /:=|::|\+|-|\*|\/|%|==|!=|>|<|>=|<=|&&|\|\||!|\+=|-=|\*=/
-                    },
-                    {
-                        className: 'type',
-                        begin: /\b[A-Z][a-zA-Z0-9_]*\b/
-                    },
-                    {
-                        className: 'title.function.invoke',
-                        begin: /\b[a-zA-Z_]\w*(?=\s*\()/
-                    },
-                    {
-                        className: 'property', // Dành cho 'fmt' trong 'fmt.println'
-                        begin: /\b[a-zA-Z_]\w*(?=\.)/
-                    }
+                    STRINGS,
+                    NUMBERS,
+                    OPERATORS,
+                    IDENT_BEFORE_COLON,
+                    PACKAGE_PREFIX,
+                    FUNC_INVOKE,
+                    CUSTOM_TYPES
                 ]
             };
         });
