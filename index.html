@@ -742,6 +742,66 @@
             <div style="width: 100%; font-size: 0.8rem; color: #94a3b8; margin-top: 15px; font-weight: bold; text-transform: uppercase;">SolidJS / SolidStart</div>
             <button class="tab-btn" onclick="switchTab('tab-solidjs', this)" style="color: #446b9e;">SolidJS</button>
             <button class="tab-btn" onclick="switchTab('tab-solidstart', this)" style="color: #8b5cf6;">SolidStart</button>
+
+            <div style="width: 100%; font-size: 0.8rem; color: #94a3b8; margin-top: 15px; font-weight: bold; text-transform: uppercase;">Godot 2D</div>
+            <button class="tab-btn" onclick="switchTab('tab-godot-basic', this)" style="color: #478cbf;">Cơ Bản</button>
+            <button class="tab-btn" onclick="switchTab('tab-godot-devgame', this)" style="color: #478cbf;">Mẫu Thiết Kế</button>
+            <button class="tab-btn" onclick="switchTab('tab-godot-farmer', this)" style="color: #478cbf;">Farmer Game</button>
+            <button class="tab-btn" onclick="switchTab('tab-godot-nangcao', this)" style="color: #478cbf;">Nâng Cao</button>
+        </div>
+
+        <div id="tab-godot-basic" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">GDScript Cơ Bản</div>
+                <ul class="nav-list" id="nav-godot-basic">
+                    <li class="nav-item" onclick="loadMarkdown('GDScript_basic/bai_1_gioi_thieu.md', this)">Bài 1: Giới thiệu & Cú pháp cơ bản</li>
+                    <li class="nav-item" onclick="loadMarkdown('GDScript_basic/bai_2_node_va_scene.md', this)">Bài 2: Các khái niệm cốt lõi: Node & Scene</li>
+                    <li class="nav-item" onclick="loadMarkdown('GDScript_basic/bai_3_input.md', this)">Bài 3: Xử lý Input & Sự kiện</li>
+                    <li class="nav-item" onclick="loadMarkdown('GDScript_basic/bai_4_signals.md', this)">Bài 4: Hệ thống Tín hiệu (Signals)</li>
+                    <li class="nav-item" onclick="loadMarkdown('GDScript_basic/bai_5_toan_hoc_2d.md', this)">Bài 5: Vectơ và Toán học trong Game 2D</li>
+                    <li class="nav-item" onclick="loadMarkdown('GDScript_basic/bai_6_instancing.md', this)">Bài 6: Sinh ra Scene bằng Code (Instancing)</li>
+                    <li class="nav-item" onclick="loadMarkdown('GDScript_basic/bai_7_va_cham_co_ban.md', this)">Bài 7: Các loại Node Vật lý và Va chạm</li>
+                    <li class="nav-item" onclick="loadMarkdown('GDScript_basic/bai_8_oop_classes_va_init.md', this)">Bài 8: Hướng Đối Tượng - Lớp và Khởi tạo</li>
+                    <li class="nav-item" onclick="loadMarkdown('GDScript_basic/bai_9_oop_ke_thua_va_da_hinh.md', this)">Bài 9: Hướng Đối Tượng - Kế thừa và Đa hình</li>
+                    <li class="nav-item" onclick="loadMarkdown('GDScript_basic/bai_10_oop_getters_setters.md', this)">Bài 10: Hướng Đối Tượng - Getters và Setters</li>
+                </ul>
+            </div>
+        </div>
+        <div id="tab-godot-devgame" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">Godot Khi Làm Game (GDScript & C#)</div>
+                <ul class="nav-list" id="nav-godot-devgame">
+                    <li class="nav-item" onclick="loadMarkdown('Godot_devgame/bai_1_state_machine.md', this)">Bài 1: State Machine Cơ Bản (FSM)</li>
+                    <li class="nav-item" onclick="loadMarkdown('Godot_devgame/bai_2_autoload_singleton.md', this)">Bài 2: Autoload (Singleton) & Global State</li>
+                    <li class="nav-item" onclick="loadMarkdown('Godot_devgame/bai_3_event_bus.md', this)">Bài 3: Hệ thống Event Bus (Signals)</li>
+                    <li class="nav-item" onclick="loadMarkdown('Godot_devgame/bai_4_object_pooling.md', this)">Bài 4: Object Pooling (Tối ưu đạn)</li>
+                    <li class="nav-item" onclick="loadMarkdown('Godot_devgame/bai_5_component_pattern.md', this)">Bài 5: Kiến trúc Component-based</li>
+                </ul>
+            </div>
+        </div>
+        <div id="tab-godot-farmer" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">Triển Khai Godot 2D - Farmer Game</div>
+                <ul class="nav-list" id="nav-godot-avatar2d">
+                    <li class="nav-item" onclick="loadMarkdown('Godot_avatar2D/bai_1_tilemap_va_nhan_vat.md', this)">Bài 1: Khởi tạo Bản đồ (TileMap) và Nhân vật</li>
+                    <li class="nav-item" onclick="loadMarkdown('Godot_avatar2D/bai_2_di_chuyen_grid.md', this)">Bài 2: Di chuyển theo Ô (Grid-based Movement)</li>
+                    <li class="nav-item" onclick="loadMarkdown('Godot_avatar2D/bai_3_he_thong_cuoc_dat.md', this)">Bài 3: Tương tác Cuốc đất (Thay đổi TileMap)</li>
+                    <li class="nav-item" onclick="loadMarkdown('Godot_avatar2D/bai_4_he_thong_trong_cay.md', this)">Bài 4: Gieo hạt và Thời gian lớn (Timer)</li>
+                    <li class="nav-item" onclick="loadMarkdown('Godot_avatar2D/bai_5_kho_do_inventory.md', this)">Bài 5: Thu hoạch & Quản lý Kho đồ (Inventory)</li>
+                </ul>
+            </div>
+        </div>
+        <div id="tab-godot-nangcao" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">Godot Nâng Cao (UI & Animation)</div>
+                <ul class="nav-list" id="nav-godot-nangcao">
+                    <li class="nav-item" onclick="loadMarkdown('Godot_nangcao/bai_1_ui_control_nodes.md', this)">Bài 1: Làm Chủ Hệ Thống Giao Diện (Control Nodes)</li>
+                    <li class="nav-item" onclick="loadMarkdown('Godot_nangcao/bai_2_hud_thanh_mau_va_icon.md', this)">Bài 2: Tạo HUD In-game (Thanh Máu & Icon)</li>
+                    <li class="nav-item" onclick="loadMarkdown('Godot_nangcao/bai_3_animation_player_co_ban.md', this)">Bài 3: Nhập Môn AnimationPlayer</li>
+                    <li class="nav-item" onclick="loadMarkdown('Godot_nangcao/bai_4_animation_tree_blendspace.md', this)">Bài 4: Đỉnh cao AnimationTree (BlendSpace2D)</li>
+                    <li class="nav-item" onclick="loadMarkdown('Godot_nangcao/bai_5_state_machine_trong_animation_tree.md', this)">Bài 5: State Machine trong AnimationTree</li>
+                </ul>
+            </div>
         </div>
 
         <div id="tab-duan" class="tab-content">
