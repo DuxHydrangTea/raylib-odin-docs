@@ -748,6 +748,9 @@
             <button class="tab-btn" onclick="switchTab('tab-godot-devgame', this)" style="color: #478cbf;">Mẫu Thiết Kế</button>
             <button class="tab-btn" onclick="switchTab('tab-godot-farmer', this)" style="color: #478cbf;">Farmer Game</button>
             <button class="tab-btn" onclick="switchTab('tab-godot-nangcao', this)" style="color: #478cbf;">Nâng Cao</button>
+            <button class="tab-btn" onclick="switchTab('tab-godot-component', this)" style="color: #478cbf;">Component</button>
+            <button class="tab-btn" onclick="switchTab('tab-godot-nodes', this)" style="color: #478cbf;">Từ điển Node</button>
+            <button class="tab-btn" onclick="switchTab('tab-godot-helper', this)" style="color: #478cbf;">Hàm Helper</button>
         </div>
 
         <div id="tab-godot-basic" class="tab-content">
@@ -800,6 +803,44 @@
                     <li class="nav-item" onclick="loadMarkdown('Godot_nangcao/bai_3_animation_player_co_ban.md', this)">Bài 3: Nhập Môn AnimationPlayer</li>
                     <li class="nav-item" onclick="loadMarkdown('Godot_nangcao/bai_4_animation_tree_blendspace.md', this)">Bài 4: Đỉnh cao AnimationTree (BlendSpace2D)</li>
                     <li class="nav-item" onclick="loadMarkdown('Godot_nangcao/bai_5_state_machine_trong_animation_tree.md', this)">Bài 5: State Machine trong AnimationTree</li>
+                </ul>
+            </div>
+        </div>
+        <div id="tab-godot-component" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">Thư Viện Component (Godot 2D)</div>
+                <ul class="nav-list" id="nav-godot-component">
+                    <li class="nav-item" onclick="loadMarkdown('component_godot/bai_1_health_component.md', this)">Bài 1: Health Component (Máu & I-Frames)</li>
+                    <li class="nav-item" onclick="loadMarkdown('component_godot/bai_2_hitbox_va_hurtbox.md', this)">Bài 2: Hitbox & Hurtbox Component</li>
+                    <li class="nav-item" onclick="loadMarkdown('component_godot/bai_3_velocity_component.md', this)">Bài 3: Velocity Component (Vật lý)</li>
+                    <li class="nav-item" onclick="loadMarkdown('component_godot/bai_4_audio_component.md', this)">Bài 4: Audio Component (Random Pitch)</li>
+                    <li class="nav-item" onclick="loadMarkdown('component_godot/bai_5_drop_component.md', this)">Bài 5: Drop Component (Loot rớt đồ)</li>
+                </ul>
+            </div>
+        </div>
+        <div id="tab-godot-nodes" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">Từ điển Node 2D</div>
+                <ul class="nav-list" id="nav-godot-nodes">
+                    <li class="nav-item" onclick="loadMarkdown('nodes_godot/bai_1_nhom_visuals.md', this)">Bài 1: Nhóm Hình Ảnh (Visuals)</li>
+                    <li class="nav-item" onclick="loadMarkdown('nodes_godot/bai_2_nhom_physics.md', this)">Bài 2: Nhóm Vật lý & Va chạm (Physics)</li>
+                    <li class="nav-item" onclick="loadMarkdown('nodes_godot/bai_3_nhom_vfx_lighting.md', this)">Bài 3: Nhóm Ánh sáng & Hiệu ứng (VFX)</li>
+                    <li class="nav-item" onclick="loadMarkdown('nodes_godot/bai_4_nhom_camera_audio.md', this)">Bài 4: Nhóm Nghe - Nhìn (Camera & Audio)</li>
+                    <li class="nav-item" onclick="loadMarkdown('nodes_godot/bai_5_nhom_navigation.md', this)">Bài 5: Nhóm Tìm đường (Navigation & AI)</li>
+                    <li class="nav-item" onclick="loadMarkdown('nodes_godot/bai_6_nhom_skeletal.md', this)">Bài 6: Nhóm Hoạt hình Xương (Skeletal)</li>
+                    <li class="nav-item" onclick="loadMarkdown('nodes_godot/bai_7_nhom_utilities.md', this)">Bài 7: Nhóm Công cụ Tiện ích (Utilities)</li>
+                </ul>
+            </div>
+        </div>
+        <div id="tab-godot-helper" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">Từ điển Hàm Helper 2D</div>
+                <ul class="nav-list" id="nav-godot-helper">
+                    <li class="nav-item" onclick="loadMarkdown('helper_godot/bai_1_physics_kinematics.md', this)">Bài 1: Hàm Di chuyển Vật lý</li>
+                    <li class="nav-item" onclick="loadMarkdown('helper_godot/bai_2_vector_math.md', this)">Bài 2: Hàm Toán học Vector2</li>
+                    <li class="nav-item" onclick="loadMarkdown('helper_godot/bai_3_node2d_transform.md', this)">Bài 3: Hàm Tọa độ Trực quan (Node2D)</li>
+                    <li class="nav-item" onclick="loadMarkdown('helper_godot/bai_4_global_math.md', this)">Bài 4: Hàm Toán học Toàn cục (Global)</li>
+                    <li class="nav-item" onclick="loadMarkdown('helper_godot/bai_5_raycast_area.md', this)">Bài 5: Hàm Dò tìm (Raycast & Area)</li>
                 </ul>
             </div>
         </div>
