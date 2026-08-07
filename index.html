@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raylib Odin - Giáo trình Game 2D</title>
+    <title>Raylib Odin - Giáo trình của Dũng</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Giáo trình lập trình game 2D toàn tập với Raylib và ngôn ngữ Odin. Bao gồm kỹ thuật lập trình game offline và kiến trúc game online MMO.">
+    <meta name="description"
+        content="Giáo trình lập trình game 2D toàn tập với Raylib và ngôn ngữ Odin. Bao gồm kỹ thuật lập trình game offline và kiến trúc game online MMO.">
     <meta name="keywords" content="Raylib, Odin, Lập trình game, Game 2D, Game Online, MMO, Tutorial, Giáo trình">
     <meta name="author" content="Raylib Odin Tutorial">
 
@@ -15,15 +16,18 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://duxhydrangtea.github.io/raylib-odin-docs/">
     <meta property="og:title" content="Raylib Odin - Giáo trình Game 2D">
-    <meta property="og:description" content="Giáo trình lập trình game 2D toàn tập với Raylib và ngôn ngữ Odin. Bao gồm kỹ thuật lập trình game offline và kiến trúc game online MMO.">
+    <meta property="og:description"
+        content="Giáo trình lập trình game 2D toàn tập với Raylib và ngôn ngữ Odin. Bao gồm kỹ thuật lập trình game offline và kiến trúc game online MMO.">
     <meta property="og:image" content="https://raw.githubusercontent.com/raysan5/raylib/master/logo/raylib_256x256.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://duxhydrangtea.github.io/raylib-odin-docs/">
     <meta property="twitter:title" content="Raylib Odin - Giáo trình Game 2D">
-    <meta property="twitter:description" content="Giáo trình lập trình game 2D toàn tập với Raylib và ngôn ngữ Odin. Bao gồm kỹ thuật lập trình game offline và kiến trúc game online MMO.">
-    <meta property="twitter:image" content="https://raw.githubusercontent.com/raysan5/raylib/master/logo/raylib_256x256.png">
+    <meta property="twitter:description"
+        content="Giáo trình lập trình game 2D toàn tập với Raylib và ngôn ngữ Odin. Bao gồm kỹ thuật lập trình game offline và kiến trúc game online MMO.">
+    <meta property="twitter:image"
+        content="https://raw.githubusercontent.com/raysan5/raylib/master/logo/raylib_256x256.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="https://www.raylib.com/favicon.ico">
@@ -37,12 +41,13 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <!-- Highlight.js để tô màu code -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/dracula.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/dracula.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script>
         // Custom Highlight.js for Odin language (Matching the screenshot theme)
-        hljs.registerLanguage('odin', function(e) {
+        hljs.registerLanguage('odin', function (e) {
             return {
                 name: 'Odin',
                 aliases: ['odin'],
@@ -107,13 +112,16 @@
             width: 8px;
             height: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: var(--bg-color);
         }
+
         ::-webkit-scrollbar-thumb {
             background: #475569;
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #64748b;
         }
@@ -174,7 +182,7 @@
             justify-content: center;
             padding: 4px;
         }
-        
+
         .reload-btn:hover {
             color: var(--accent-color);
             transform: rotate(90deg);
@@ -332,7 +340,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         pre code {
             display: block;
             padding: 20px !important;
@@ -354,7 +362,7 @@
             font-family: 'Inter', sans-serif;
             backdrop-filter: blur(4px);
         }
-        
+
         .copy-btn:hover {
             background: rgba(56, 189, 248, 0.15);
             color: var(--accent-color);
@@ -495,7 +503,7 @@
                 display: block;
             }
         }
-    
+
         .sidebar-tabs {
             display: flex;
             flex-wrap: wrap;
@@ -508,6 +516,7 @@
             padding: 6px;
             gap: 4px;
         }
+
         .tab-btn {
             flex: 1 1 30%;
             background: rgba(255, 255, 255, 0.03);
@@ -520,20 +529,24 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .tab-btn.active {
             background: rgba(56, 189, 248, 0.1);
             color: var(--accent-color);
             border-color: rgba(56, 189, 248, 0.2);
             box-shadow: 0 4px 12px rgba(56, 189, 248, 0.1);
         }
+
         .tab-btn:hover:not(.active) {
             background: rgba(255, 255, 255, 0.08);
             color: #f8fafc;
         }
+
         .tab-content {
             display: none;
             animation: fadeIn 0.4s ease-out;
         }
+
         .tab-content.active {
             display: block;
         }
@@ -555,10 +568,12 @@
             z-index: 100;
             transition: right 0.3s ease;
         }
+
         #right-sidebar.active {
             right: 0;
             box-shadow: -4px 0 15px rgba(0, 0, 0, 0.5);
         }
+
         @media (min-width: 1200px) {
             #right-sidebar {
                 position: static;
@@ -567,6 +582,7 @@
                 box-shadow: none;
             }
         }
+
         .toc-header {
             padding: 24px;
             border-bottom: 1px solid var(--border-color);
@@ -577,9 +593,11 @@
             top: 0;
             background-color: var(--sidebar-bg);
         }
+
         .toc-list {
             padding: 15px 10px;
         }
+
         .toc-item {
             display: block;
             color: #94a3b8;
@@ -591,19 +609,23 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             line-height: 1.4;
         }
+
         .toc-item:hover {
             background: rgba(56, 189, 248, 0.1);
             color: var(--accent-color);
             transform: translateX(4px);
         }
+
         .toc-item.toc-H3 {
             padding-left: 30px;
             font-size: 0.85rem;
         }
+
         .toc-item i {
             margin-right: 8px;
             color: #64748b;
         }
+
         .toc-item:hover i {
             color: var(--accent-color);
         }
@@ -618,6 +640,7 @@
             border-top: 1px solid var(--border-color);
             gap: 15px;
         }
+
         .nav-next-prev-btn {
             background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
             border: 1px solid rgba(51, 65, 85, 0.6);
@@ -635,23 +658,26 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
+
         .nav-next-prev-btn:hover {
             border-color: rgba(56, 189, 248, 0.5);
             color: var(--accent-color);
             box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.2);
             transform: translateY(-2px);
         }
+
         .nav-next-prev-btn span {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
         .nav-next-btn {
-            margin-left: auto; /* Đẩy sang phải nếu không có nút prev */
+            margin-left: auto;
+            /* Đẩy sang phải nếu không có nút prev */
             text-align: right;
             justify-content: flex-end;
         }
-
     </style>
 </head>
 
@@ -679,489 +705,684 @@
             <button class="tab-btn" onclick="switchTab('tab-reactjs', this)" style="color: #61dafb;">ReactJS</button>
         </div>
 
-<div id="tab-duan" class="tab-content active">
-<div class="nav-section">
-            <div class="nav-section-title">Khởi động Dự án</div>
-            <ul class="nav-list" id="nav-thuchanh">
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/huong_dan_khoi_tao.md', this)">3 Bước Đầu Tiên</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/huong_dan_hoan_thien.md', this)">5 Bước Hoàn Thiện
-                </li>
-            </ul>
+        <div id="tab-duan" class="tab-content active">
+            <div class="nav-section">
+                <div class="nav-section-title">Khởi động Dự án</div>
+                <ul class="nav-list" id="nav-thuchanh">
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh/huong_dan_khoi_tao.md', this)">3 Bước Đầu Tiên
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh/huong_dan_hoan_thien.md', this)">5 Bước Hoàn
+                        Thiện
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Dự án Tốt Nghiệp (Vampire Survivors)</div>
+                <ul class="nav-list" id="nav-project">
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_1_core_va_tilemap.md', this)">
+                        Phần
+                        1: Core, Camera & Tilemap</li>
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_2_ecs_va_ai.md', this)">Phần 2:
+                        ECS
+                        & 1000 Quái vật</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('thuchanh/thuchanh_du_an_3_va_cham_va_hieu_ung.md', this)">
+                        Phần 3: Va chạm, Đạn & Hạt</li>
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_4_ui_va_state.md', this)">Phần
+                        4:
+                        Thanh Máu & State Machine</li>
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_5_toi_uu_va_build.md', this)">
+                        Phần
+                        5: Game Feel & Đóng gói Web</li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Thực Hành Nông Trại (Avatar 2D)</div>
+                <ul class="nav-list" id="nav-thuchanh-farmer">
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_1_khoi_tao_project.md', this)">Bài
+                        1: Khởi tạo & Game Loop</li>
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_2_load_texture_tilemap.md', this)">
+                        Bài 2: Tải Ảnh & Tilemap</li>
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_3_lap_rap_ecs.md', this)">Bài 3: Lắp
+                        ráp ECS Cơ bản</li>
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_4_grid_movement.md', this)">Bài 4:
+                        Di chuyển Grid-based</li>
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_5_tuong_tac_cuoc_dat.md', this)">Bài
+                        5: Tương tác Cuốc đất</li>
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_6_trong_cay_thu_hoach.md', this)">
+                        Bài 6: Trồng cây & Thu hoạch</li>
+                    <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_7_inventory_game_feel.md', this)">
+                        Bài 7: Kho đồ & Game Feel</li>
+                </ul>
+            </div>
         </div>
-<div class="nav-section">
-            <div class="nav-section-title">Dự án Tốt Nghiệp (Vampire Survivors)</div>
-            <ul class="nav-list" id="nav-project">
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_1_core_va_tilemap.md', this)">Phần
-                    1: Core, Camera & Tilemap</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_2_ecs_va_ai.md', this)">Phần 2: ECS
-                    & 1000 Quái vật</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_3_va_cham_va_hieu_ung.md', this)">
-                    Phần 3: Va chạm, Đạn & Hạt</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_4_ui_va_state.md', this)">Phần 4:
-                    Thanh Máu & State Machine</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh/thuchanh_du_an_5_toi_uu_va_build.md', this)">Phần
-                    5: Game Feel & Đóng gói Web</li>
-            </ul>
-        </div>
-<div class="nav-section">
-            <div class="nav-section-title">Thực Hành Nông Trại (Avatar 2D)</div>
-            <ul class="nav-list" id="nav-thuchanh-farmer">
-                <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_1_khoi_tao_project.md', this)">Bài 1: Khởi tạo & Game Loop</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_2_load_texture_tilemap.md', this)">Bài 2: Tải Ảnh & Tilemap</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_3_lap_rap_ecs.md', this)">Bài 3: Lắp ráp ECS Cơ bản</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_4_grid_movement.md', this)">Bài 4: Di chuyển Grid-based</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_5_tuong_tac_cuoc_dat.md', this)">Bài 5: Tương tác Cuốc đất</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_6_trong_cay_thu_hoach.md', this)">Bài 6: Trồng cây & Thu hoạch</li>
-                <li class="nav-item" onclick="loadMarkdown('thuchanh_farmer/bai_7_inventory_game_feel.md', this)">Bài 7: Kho đồ & Game Feel</li>
-            </ul>
-        </div>
-</div>
-<div id="tab-lotrinh" class="tab-content">
-<div class="nav-section">
-            <div class="nav-section-title">Lộ trình Cơ Bản</div>
-            <ul class="nav-list" id="nav-basic">
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_1.md', this)">Chương 1: Core & Game Loop</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_2.md', this)">Chương 2: FPS & Basic Shapes
-                </li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_3.md', this)">Chương 3: Input & Vector Math
-                </li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_4.md', this)">Chương 4: Textures & UI Fonts
-                </li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_5.md', this)">Chương 5: Collision & Camera
-                </li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_6.md', this)">Chương 6: Audio & Save/Load</li>
-            </ul>
-        </div>
-<div class="nav-section">
-            <div class="nav-section-title">Lộ trình Nâng Cao</div>
-            <ul class="nav-list" id="nav-advanced">
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_7.md', this)">Chương 7: RenderTexture</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_8.md', this)">Chương 8: Blend Modes & Shaders
-                </li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_9.md', this)">Chương 9: 9-Patch & Scissor UI
-                </li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_10.md', this)">Chương 10: State Machine &
-                    Arena</li>
-            </ul>
-        </div>
-<div class="nav-section">
-            <div class="nav-section-title">Cấp độ Chuyên Gia</div>
-            <ul class="nav-list" id="nav-expert">
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_11.md', this)">Chương 11: Physics System</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_12.md', this)">Chương 12: ECS Architecture
-                </li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_13.md', this)">Chương 13: Particle System</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_14.md', this)">Chương 14: Tilemap & Culling
-                </li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_15.md', this)">Chương 15: Threads & Network
-                </li>
-            </ul>
-        </div>
-<div class="nav-section">
-            <div class="nav-section-title">Nghệ thuật Thiết kế</div>
-            <ul class="nav-list" id="nav-art">
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_16.md', this)">Chương 16: AI & Pathfinding
-                </li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_17.md', this)">Chương 17: Skeletal Animation
-                </li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_18.md', this)">Chương 18: Profiling &
-                    Optimization</li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_19.md', this)">Chương 19: Deployment & WASM
-                </li>
-                <li class="nav-item" onclick="loadMarkdown('chuong/chuong_20.md', this)">Chương 20: Game Juice</li>
-            </ul>
+        <div id="tab-lotrinh" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">Lộ trình Cơ Bản</div>
+                <ul class="nav-list" id="nav-basic">
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_1.md', this)">Chương 1: Core & Game Loop
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_2.md', this)">Chương 2: FPS & Basic Shapes
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_3.md', this)">Chương 3: Input & Vector
+                        Math
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_4.md', this)">Chương 4: Textures & UI
+                        Fonts
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_5.md', this)">Chương 5: Collision & Camera
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_6.md', this)">Chương 6: Audio & Save/Load
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Lộ trình Nâng Cao</div>
+                <ul class="nav-list" id="nav-advanced">
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_7.md', this)">Chương 7: RenderTexture</li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_8.md', this)">Chương 8: Blend Modes &
+                        Shaders
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_9.md', this)">Chương 9: 9-Patch & Scissor
+                        UI
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_10.md', this)">Chương 10: State Machine &
+                        Arena</li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Cấp độ Chuyên Gia</div>
+                <ul class="nav-list" id="nav-expert">
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_11.md', this)">Chương 11: Physics System
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_12.md', this)">Chương 12: ECS Architecture
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_13.md', this)">Chương 13: Particle System
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_14.md', this)">Chương 14: Tilemap &
+                        Culling
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_15.md', this)">Chương 15: Threads &
+                        Network
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Nghệ thuật Thiết kế</div>
+                <ul class="nav-list" id="nav-art">
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_16.md', this)">Chương 16: AI & Pathfinding
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_17.md', this)">Chương 17: Skeletal
+                        Animation
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_18.md', this)">Chương 18: Profiling &
+                        Optimization</li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_19.md', this)">Chương 19: Deployment &
+                        WASM
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('chuong/chuong_20.md', this)">Chương 20: Game Juice</li>
+                </ul>
+            </div>
         </div>
         </div>
-</div>
-<div id="tab-online" class="tab-content">
-<div class="nav-section">
-            <div class="nav-section-title">Kỹ Thuật Game Online</div>
-            <ul class="nav-list" id="nav-online">
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_1_co_ban_ve_mang.md', this)">Chương 1: Cơ bản về Mạng</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_2_kien_truc_mang.md', this)">Chương 2: Kiến trúc Mạng</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_3_goi_tin_du_lieu.md', this)">Chương 3: Gói tin Dữ liệu</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_4_lap_trinh_socket.md', this)">Chương 4: Lập trình Socket</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_5_dong_bo_trang_thai.md', this)">Chương 5: Đồng bộ Trạng thái</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_6_du_doan_client.md', this)">Chương 6: Dự đoán Client</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_7_boi_thuong_do_tre.md', this)">Chương 7: Bồi thường Độ trễ</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_8_ngoai_suy.md', this)">Chương 8: Kỹ thuật Ngoại suy</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_9_toi_uu_bang_thong.md', this)">Chương 9: Tối ưu Băng thông</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_10_bao_mat_va_scale.md', this)">Chương 10: Bảo mật & Scale</li>
-                <li class="nav-item" style="margin-top: 10px; border-top: 1px solid #334155; padding-top: 10px; color: #f59e0b;" onclick="loadMarkdown('online_game_techniques/chuong_11_mmo_farm_server.md', this)">Chương 11: MMO Farm - Server</li>
-                <li class="nav-item" style="color: #f59e0b;" onclick="loadMarkdown('online_game_techniques/chuong_12_mmo_farm_chunking.md', this)">Chương 12: MMO Farm - Chunking</li>
-                <li class="nav-item" style="color: #f59e0b;" onclick="loadMarkdown('online_game_techniques/chuong_13_mmo_farm_economy.md', this)">Chương 13: MMO Farm - Kinh Tế</li>
-            </ul>
+        <div id="tab-online" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">Kỹ Thuật Game Online</div>
+                <ul class="nav-list" id="nav-online">
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/chuong_1_co_ban_ve_mang.md', this)">Chương 1: Cơ
+                        bản về Mạng</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/chuong_2_kien_truc_mang.md', this)">Chương 2: Kiến
+                        trúc Mạng</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/chuong_3_goi_tin_du_lieu.md', this)">Chương 3: Gói
+                        tin Dữ liệu</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/chuong_4_lap_trinh_socket.md', this)">Chương 4:
+                        Lập trình Socket</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/chuong_5_dong_bo_trang_thai.md', this)">Chương 5:
+                        Đồng bộ Trạng thái</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/chuong_6_du_doan_client.md', this)">Chương 6: Dự
+                        đoán Client</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/chuong_7_boi_thuong_do_tre.md', this)">Chương 7:
+                        Bồi thường Độ trễ</li>
+                    <li class="nav-item" onclick="loadMarkdown('online_game_techniques/chuong_8_ngoai_suy.md', this)">
+                        Chương 8: Kỹ thuật Ngoại suy</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/chuong_9_toi_uu_bang_thong.md', this)">Chương 9:
+                        Tối ưu Băng thông</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/chuong_10_bao_mat_va_scale.md', this)">Chương 10:
+                        Bảo mật & Scale</li>
+                    <li class="nav-item"
+                        style="margin-top: 10px; border-top: 1px solid #334155; padding-top: 10px; color: #f59e0b;"
+                        onclick="loadMarkdown('online_game_techniques/chuong_11_mmo_farm_server.md', this)">Chương 11:
+                        MMO Farm - Server</li>
+                    <li class="nav-item" style="color: #f59e0b;"
+                        onclick="loadMarkdown('online_game_techniques/chuong_12_mmo_farm_chunking.md', this)">Chương 12:
+                        MMO Farm - Chunking</li>
+                    <li class="nav-item" style="color: #f59e0b;"
+                        onclick="loadMarkdown('online_game_techniques/chuong_13_mmo_farm_economy.md', this)">Chương 13:
+                        MMO Farm - Kinh Tế</li>
+                </ul>
+            </div>
         </div>
-</div>
-<div id="tab-online-vande" class="tab-content">
-<div class="nav-section">
-            <div class="nav-section-title">6 Lỗi Game Online Kinh Điển</div>
-            <ul class="nav-list" id="nav-online-problems">
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/problems/problem_1_desync.md', this)">Lỗi 1: Desync (Bất đồng bộ)</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/problems/problem_2_rubberbanding.md', this)">Lỗi 2: Rubber-banding (Giật lùi)</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/problems/problem_3_ghost_bullets.md', this)">Lỗi 3: Ghost Bullets (Đạn ảo)</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/problems/problem_4_nagles_algorithm.md', this)">Lỗi 4: Nagle's Algorithm (Trễ TCP)</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/problems/problem_5_tickrate_drop.md', this)">Lỗi 5: Server Tickrate Drop</li>
-                <li class="nav-item" onclick="loadMarkdown('online_game_techniques/problems/problem_6_nat_traversal.md', this)">Lỗi 6: Không kết nối được P2P</li>
-            </ul>
+        <div id="tab-online-vande" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">6 Lỗi Game Online Kinh Điển</div>
+                <ul class="nav-list" id="nav-online-problems">
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/problems/problem_1_desync.md', this)">Lỗi 1:
+                        Desync (Bất đồng bộ)</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/problems/problem_2_rubberbanding.md', this)">Lỗi
+                        2: Rubber-banding (Giật lùi)</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/problems/problem_3_ghost_bullets.md', this)">Lỗi
+                        3: Ghost Bullets (Đạn ảo)</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/problems/problem_4_nagles_algorithm.md', this)">
+                        Lỗi 4: Nagle's Algorithm (Trễ TCP)</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/problems/problem_5_tickrate_drop.md', this)">Lỗi
+                        5: Server Tickrate Drop</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('online_game_techniques/problems/problem_6_nat_traversal.md', this)">Lỗi
+                        6: Không kết nối được P2P</li>
+                </ul>
+            </div>
         </div>
-</div>
-<div id="tab-vande" class="tab-content">
-<div class="nav-section">
-            <div class="nav-section-title">30 Vấn Đề Thực Tế (Troubleshooting)</div>
-            <ul class="nav-list" id="nav-problems">
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_1_ysorting.md', this)">Vấn Đề
-                    1: Y-Sorting</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_2_tilemap_bleeding.md', this)">
-                    Vấn Đề 2: Tilemap Bleeding</li>
-                <li class="nav-item"
-                    onclick="loadMarkdown('problems_and_resolve/problem_3_resolution_scaling.md', this)">Vấn Đề 3: Méo
-                    hình khi Resize</li>
-                <li class="nav-item"
-                    onclick="loadMarkdown('problems_and_resolve/problem_4_collision_tunneling.md', this)">Vấn Đề 4: Đạn
-                    bay xuyên tường</li>
-                <li class="nav-item"
-                    onclick="loadMarkdown('problems_and_resolve/problem_5_diagonal_movement.md', this)">Vấn Đề 5: Đi
-                    chéo bị nhanh hơn</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_6_wall_sticking.md', this)">Vấn
-                    Đề 6: Kẹt vào tường</li>
-                <li class="nav-item"
-                    onclick="loadMarkdown('problems_and_resolve/problem_7_framerate_dependence.md', this)">Vấn Đề 7: Tốc
-                    độ phụ thuộc FPS</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_8_input_dropping.md', this)">
-                    Vấn Đề 8: Rớt phím bấm</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_9_gc_spikes.md', this)">Vấn Đề
-                    9: Lag do Rác bộ nhớ</li>
-                <li class="nav-item"
-                    onclick="loadMarkdown('problems_and_resolve/problem_10_state_management.md', this)">Vấn Đề 10: Code
-                    Mì Ý</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_11_object_pooling.md', this)">
-                    Vấn Đề 11: Lag do Sinh Quái</li>
-                <li class="nav-item"
-                    onclick="loadMarkdown('problems_and_resolve/problem_12_rng_predictability.md', this)">Vấn Đề 12:
-                    Random bị trùng</li>
-                <li class="nav-item"
-                    onclick="loadMarkdown('problems_and_resolve/problem_13_audio_overlapping.md', this)">Vấn Đề 13: Điếc
-                    tai vì Âm thanh</li>
-                <li class="nav-item"
-                    onclick="loadMarkdown('problems_and_resolve/problem_14_ghost_collisions.md', this)">Vấn Đề 14: Kẹt
-                    góc Tilemap</li>
-                <li class="nav-item"
-                    onclick="loadMarkdown('problems_and_resolve/problem_15_pathfinding_bottleneck.md', this)">Vấn Đề 15:
-                    Tràn CPU Tìm đường</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_16_save_corruption.md', this)">
-                    Vấn Đề 16: Hỏng file Save game</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_17_camera_jitter.md', this)">
-                    Vấn Đề 17: Camera bị rung giật</li>
-                <li class="nav-item"
-                    onclick="loadMarkdown('problems_and_resolve/problem_18_ui_click_through.md', this)">Vấn Đề 18: Bấm
-                    xuyên qua UI</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_19_loading_block.md', this)">
-                    Vấn Đề 19: Đứng hình khi Tải</li>
-                <li class="nav-item"
-                    onclick="loadMarkdown('problems_and_resolve/problem_20_floating_point_loss.md', this)">Vấn Đề 20:
-                    Thế giới mở bị lỗi</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_21_memory_fragmentation.md', this)">
-                    Vấn Đề 21: Phân mảnh bộ nhớ</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_22_fixed_update.md', this)">
-                    Vấn Đề 22: Vật lý giật cục</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_23_asset_duplication.md', this)">
-                    Vấn Đề 23: Tràn VRAM do load ảnh</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_24_async_hell.md', this)">
-                    Vấn Đề 24: Kẹt đơ game vòng lặp</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_25_dt_spiral_of_death.md', this)">
-                    Vấn Đề 25: Vòng xoáy tử thần DT</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_26_isometric_zsorting.md', this)">
-                    Vấn Đề 26: Lỗi đè chéo đồ họa</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_27_dangling_pointers.md', this)">
-                    Vấn Đề 27: Con trỏ lơ lửng Crash</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_28_broadphase_missing.md', this)">
-                    Vấn Đề 28: Dư thừa kiểm tra va chạm</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_29_hitbox_hurtbox.md', this)">
-                    Vấn Đề 29: Sát thương khống</li>
-                <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_30_ui_anchoring.md', this)">
-                    Vấn Đề 30: UI văng khỏi màn hình</li>
-            </ul>
+        <div id="tab-vande" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">30 Vấn Đề Thực Tế (Troubleshooting)</div>
+                <ul class="nav-list" id="nav-problems">
+                    <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_1_ysorting.md', this)">Vấn
+                        Đề
+                        1: Y-Sorting</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_2_tilemap_bleeding.md', this)">
+                        Vấn Đề 2: Tilemap Bleeding</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_3_resolution_scaling.md', this)">Vấn Đề 3:
+                        Méo
+                        hình khi Resize</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_4_collision_tunneling.md', this)">Vấn Đề 4:
+                        Đạn
+                        bay xuyên tường</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_5_diagonal_movement.md', this)">Vấn Đề 5: Đi
+                        chéo bị nhanh hơn</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_6_wall_sticking.md', this)">Vấn
+                        Đề 6: Kẹt vào tường</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_7_framerate_dependence.md', this)">Vấn Đề 7:
+                        Tốc
+                        độ phụ thuộc FPS</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_8_input_dropping.md', this)">
+                        Vấn Đề 8: Rớt phím bấm</li>
+                    <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_9_gc_spikes.md', this)">Vấn
+                        Đề
+                        9: Lag do Rác bộ nhớ</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_10_state_management.md', this)">Vấn Đề 10:
+                        Code
+                        Mì Ý</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_11_object_pooling.md', this)">
+                        Vấn Đề 11: Lag do Sinh Quái</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_12_rng_predictability.md', this)">Vấn Đề 12:
+                        Random bị trùng</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_13_audio_overlapping.md', this)">Vấn Đề 13:
+                        Điếc
+                        tai vì Âm thanh</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_14_ghost_collisions.md', this)">Vấn Đề 14:
+                        Kẹt
+                        góc Tilemap</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_15_pathfinding_bottleneck.md', this)">Vấn Đề
+                        15:
+                        Tràn CPU Tìm đường</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_16_save_corruption.md', this)">
+                        Vấn Đề 16: Hỏng file Save game</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_17_camera_jitter.md', this)">
+                        Vấn Đề 17: Camera bị rung giật</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_18_ui_click_through.md', this)">Vấn Đề 18:
+                        Bấm
+                        xuyên qua UI</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_19_loading_block.md', this)">
+                        Vấn Đề 19: Đứng hình khi Tải</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_20_floating_point_loss.md', this)">Vấn Đề
+                        20:
+                        Thế giới mở bị lỗi</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_21_memory_fragmentation.md', this)">
+                        Vấn Đề 21: Phân mảnh bộ nhớ</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_22_fixed_update.md', this)">
+                        Vấn Đề 22: Vật lý giật cục</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_23_asset_duplication.md', this)">
+                        Vấn Đề 23: Tràn VRAM do load ảnh</li>
+                    <li class="nav-item" onclick="loadMarkdown('problems_and_resolve/problem_24_async_hell.md', this)">
+                        Vấn Đề 24: Kẹt đơ game vòng lặp</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_25_dt_spiral_of_death.md', this)">
+                        Vấn Đề 25: Vòng xoáy tử thần DT</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_26_isometric_zsorting.md', this)">
+                        Vấn Đề 26: Lỗi đè chéo đồ họa</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_27_dangling_pointers.md', this)">
+                        Vấn Đề 27: Con trỏ lơ lửng Crash</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_28_broadphase_missing.md', this)">
+                        Vấn Đề 28: Dư thừa kiểm tra va chạm</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_29_hitbox_hurtbox.md', this)">
+                        Vấn Đề 29: Sát thương khống</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('problems_and_resolve/problem_30_ui_anchoring.md', this)">
+                        Vấn Đề 30: UI văng khỏi màn hình</li>
+                </ul>
+            </div>
         </div>
-</div>
-<div id="tab-tailieu" class="tab-content">
-<div class="nav-section">
-            <div class="nav-section-title">Tài liệu Gốc</div>
-            <ul class="nav-list" id="nav-docs">
-                <li class="nav-item" onclick="loadMarkdown('docs.md', this)">Từ điển Raylib Toàn Tập</li>
-            </ul>
-        </div>
-</div>
-
-<div id="tab-farmer" class="tab-content">
-        <div class="nav-section">
-            <div class="nav-section-title">Phân Hệ 1: Nền Tảng</div>
-            <ul class="nav-list" id="nav-farmer-p1">
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_1_khoi_tao_game_loop.md', this)">Chương 1: Khởi tạo Game Loop</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_2_grid_movement.md', this)">Chương 2: Grid-based Movement</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_3_tilemap_camera.md', this)">Chương 3: Tilemap & Camera</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_3_phu_load_map_json.md', this)">Chương 3 (Phụ): Load Map JSON</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_4_interaction_system.md', this)">Chương 4: Tương tác Interaction</li>
-            </ul>
-        </div>
-        <div class="nav-section">
-            <div class="nav-section-title">Phân Hệ 2: Trồng Trọt</div>
-            <ul class="nav-list" id="nav-farmer-p2">
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_5_vong_doi_o_dat.md', this)">Chương 5: Vòng đời Ô Đất</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_6_vong_doi_cay_trong.md', this)">Chương 6: Vòng đời Cây Trồng</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_7_suc_khoe_cay.md', this)">Chương 7: Sức khỏe Cây</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_8_vat_pham_nong_nghiep.md', this)">Chương 8: Phân Bón</li>
-            </ul>
-        </div>
-        <div class="nav-section">
-            <div class="nav-section-title">Phân Hệ 3: Chăn Nuôi</div>
-            <ul class="nav-list" id="nav-farmer-p3">
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_9_ai_dong_vat.md', this)">Chương 9: AI Động vật Cơ bản</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_10_cho_an_sinh_san.md', this)">Chương 10: Cho Ăn & Thu Hoạch</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_11_benh_tat_vat_nuoi.md', this)">Chương 11: Bệnh tật Vật nuôi</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_12_ai_cho_canh.md', this)">Chương 12: Chó Canh Nông Trại</li>
-            </ul>
-        </div>
-        <div class="nav-section">
-            <div class="nav-section-title">Phân Hệ 4: Kinh Tế</div>
-            <ul class="nav-list" id="nav-farmer-p4">
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_13_inventory.md', this)">Chương 13: Túi đồ & Hành trang</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_14_cua_hang_npc.md', this)">Chương 14: Cửa Hàng NPC</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_15_he_thong_nang_cap.md', this)">Chương 15: Nâng Cấp Đất</li>
-            </ul>
-        </div>
-        <div class="nav-section">
-            <div class="nav-section-title">Phân Hệ 5 & 6: MMO & Polish</div>
-            <ul class="nav-list" id="nav-farmer-p5">
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_16_ket_noi_server.md', this)">Chương 16: Server MMO Base</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_17_nha_hang_xom.md', this)">Chương 17: Thăm Hàng Xóm</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_18_trom_cap_giup_do.md', this)">Chương 18: Trộm Cắp & Giúp Đỡ</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_19_ui_keo_tha.md', this)">Chương 19: UI Kéo Thả (Drag Drop)</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_20_hieu_ung_particles.md', this)">Chương 20: Hạt & Âm Thanh</li>
-                
-                <h2 class="nav-category">Đặc Biệt</h2>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_21_full_source_code.md', this)">Chương 21: Full Source Code</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_22_toi_uu_hieu_nang.md', this)">Chương 22: Tối Ưu Hiệu Năng</li>
-                <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_23_cai_thien_su_song_cho_moi_truong.md', this)">Chương 23: Sự Sống Môi Trường</li>
-            </ul>
-        </div>
-</div>
-
-<div id="tab-ninja" class="tab-content">
-        <div class="sidebar-header">
-            <h1 style="color: #ef4444;"><i class="fas fa-user-ninja"></i> Làng Tonek</h1>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 1: Platformer 2D</div>
-            <ul class="nav-list" id="nav-ninja-p1">
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/muc_luc.md', this)">Giới thiệu & Mục lục</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_1_khoi_tao_trong_luc.md', this)">Chương 1: Khởi tạo & Trọng lực</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_2_va_cham_ban_do.md', this)">Chương 2: Va chạm Bản đồ</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_3_camera_cuon_nen.md', this)">Chương 3: Camera 2D & Cuộn nền</li>
-            </ul>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 2: Võ học & Kỹ năng</div>
-            <ul class="nav-list" id="nav-ninja-p2">
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_4_ecs_hanh_dong.md', this)">Chương 4: Kiến trúc ECS</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_5_mon_phai.md', this)">Chương 5: 6 Môn Phái Huyền Thoại</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_6_ky_nang_hitbox.md', this)">Chương 6: Hệ thống Tung Chiêu</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_7_dan_phi_tieu.md', this)">Chương 7: Đạn & Phi tiêu</li>
-            </ul>
-        </div>
-
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 3: Quái vật & Combat</div>
-            <ul class="nav-list" id="nav-ninja-p3">
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_8_ai_quai_vat.md', this)">Chương 8: AI Quái vật Platformer</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_9_sat_thuong.md', this)">Chương 9: Toán học Sát thương</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_10_trang_thai_di_thuong.md', this)">Chương 10: Trạng thái dị thường</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_11_text_sat_thuong.md', this)">Chương 11: Text sát thương nhảy lên</li>
-            </ul>
-        </div>
-
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 4: Trang bị & Đập đồ</div>
-            <ul class="nav-list" id="nav-ninja-p4">
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_12_hanh_trang.md', this)">Chương 12: Hành trang (Inventory)</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_13_chi_so_random.md', this)">Chương 13: Sinh chỉ số trang bị</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_14_thuat_toan_dap_do.md', this)">Chương 14: Thuật toán Đập đồ</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_15_ghep_da.md', this)">Chương 15: Ghép đá & Ngọc</li>
-            </ul>
+        <div id="tab-tailieu" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">Tài liệu Gốc</div>
+                <ul class="nav-list" id="nav-docs">
+                    <li class="nav-item" onclick="loadMarkdown('docs.md', this)">Từ điển Raylib Toàn Tập</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 5: UI & Hoàn thiện</div>
-            <ul class="nav-list" id="nav-ninja-p5">
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_16_giao_dien.md', this)">Chương 16: Giao diện (HP, MP)</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_17_chuyen_map_save.md', this)">Chương 17: Chuyển Map & Save</li>
-                <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_18_full_code.md', this)">Chương 18: Full Source Code</li>
-            </ul>
-        </div>
-</div>
+        <div id="tab-farmer" class="tab-content">
+            <div class="nav-section">
+                <div class="nav-section-title">Phân Hệ 1: Nền Tảng</div>
+                <ul class="nav-list" id="nav-farmer-p1">
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_1_khoi_tao_game_loop.md', this)">
+                        Chương 1: Khởi tạo Game Loop</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_2_grid_movement.md', this)">Chương 2:
+                        Grid-based Movement</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_3_tilemap_camera.md', this)">Chương
+                        3: Tilemap & Camera</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_3_phu_load_map_json.md', this)">
+                        Chương 3 (Phụ): Load Map JSON</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_4_interaction_system.md', this)">
+                        Chương 4: Tương tác Interaction</li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Phân Hệ 2: Trồng Trọt</div>
+                <ul class="nav-list" id="nav-farmer-p2">
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_5_vong_doi_o_dat.md', this)">Chương
+                        5: Vòng đời Ô Đất</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_6_vong_doi_cay_trong.md', this)">
+                        Chương 6: Vòng đời Cây Trồng</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_7_suc_khoe_cay.md', this)">Chương 7:
+                        Sức khỏe Cây</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_8_vat_pham_nong_nghiep.md', this)">
+                        Chương 8: Phân Bón</li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Phân Hệ 3: Chăn Nuôi</div>
+                <ul class="nav-list" id="nav-farmer-p3">
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_9_ai_dong_vat.md', this)">Chương 9:
+                        AI Động vật Cơ bản</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_10_cho_an_sinh_san.md', this)">Chương
+                        10: Cho Ăn & Thu Hoạch</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_11_benh_tat_vat_nuoi.md', this)">
+                        Chương 11: Bệnh tật Vật nuôi</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_12_ai_cho_canh.md', this)">Chương 12:
+                        Chó Canh Nông Trại</li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Phân Hệ 4: Kinh Tế</div>
+                <ul class="nav-list" id="nav-farmer-p4">
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_13_inventory.md', this)">Chương 13:
+                        Túi đồ & Hành trang</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_14_cua_hang_npc.md', this)">Chương
+                        14: Cửa Hàng NPC</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_15_he_thong_nang_cap.md', this)">
+                        Chương 15: Nâng Cấp Đất</li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Phân Hệ 5 & 6: MMO & Polish</div>
+                <ul class="nav-list" id="nav-farmer-p5">
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_16_ket_noi_server.md', this)">Chương
+                        16: Server MMO Base</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_17_nha_hang_xom.md', this)">Chương
+                        17: Thăm Hàng Xóm</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_18_trom_cap_giup_do.md', this)">
+                        Chương 18: Trộm Cắp & Giúp Đỡ</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_19_ui_keo_tha.md', this)">Chương 19:
+                        UI Kéo Thả (Drag Drop)</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_20_hieu_ung_particles.md', this)">
+                        Chương 20: Hạt & Âm Thanh</li>
 
-<div id="tab-odin" class="tab-content">
-        <div class="sidebar-header">
-            <h1 style="color: #3b82f6;"><i class="fas fa-book-open"></i> Odin: 0 to Hero</h1>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 1: Nhập môn</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/muc_luc.md', this)">Giới thiệu & Mục lục</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_1_gioi_thieu_va_cai_dat.md', this)">Chương 1: Giới thiệu & Cài đặt</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_2_bien_hang_va_kieu_du_lieu.md', this)">Chương 2: Biến, Hằng số & Kiểu DL</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_3_toan_tu_va_ep_kieu.md', this)">Chương 3: Toán tử & Ép kiểu</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_4_cau_truc_dieu_khien.md', this)">Chương 4: Cấu trúc điều khiển</li>
-            </ul>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 2: CTDL & Hàm</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_5_mang_slice_chuoi.md', this)">Chương 5: Mảng, Slice & Chuỗi</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_6_ham_va_defer.md', this)">Chương 6: Hàm & Defer</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_7_struct_union_enum.md', this)">Chương 7: Struct, Union, Enum</li>
-            </ul>
-        </div>
-
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 3: Bộ nhớ & Con trỏ</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_8_con_tro.md', this)">Chương 8: Con trỏ</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_9_quan_ly_bo_nho.md', this)">Chương 9: Stack vs Heap</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_10_he_thong_context.md', this)">Chương 10: Hệ thống Context</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_11_cau_truc_du_lieu_dong.md', this)">Chương 11: Mảng động & Map</li>
-            </ul>
-        </div>
-
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 4: Nâng cao</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_12_allocators.md', this)">Chương 12: Allocators & Arena</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_13_da_luong.md', this)">Chương 13: Đa luồng (Threading)</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_14_bitwise_dod.md', this)">Chương 14: Bitwise & DOD</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_15_c_interop.md', this)">Chương 15: Giao tiếp với C</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_16_reflection.md', this)">Chương 16: Polymorphism & Reflection</li>
-            </ul>
-        </div>
-
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 5: Tổ chức dự án</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_17_packages_scope.md', this)">Chương 17: Packages & Scope</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_18_xu_ly_loi.md', this)">Chương 18: Xử lý lỗi</li>
-                <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_19_testing.md', this)">Chương 19: Viết Test (Testing)</li>
-            </ul>
-        </div>
-</div>
-
-<div id="tab-nextjs" class="tab-content">
-        <div class="sidebar-header">
-            <h1 style="color: #10b981;"><i class="fab fa-react"></i> Next.js Toàn Tập</h1>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 1: Nhập Môn & Khởi Tạo</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('next_react_js/00_muc_luc.md', this)">Giới thiệu & Mục lục</li>
-                <li class="nav-item" onclick="loadMarkdown('next_react_js/01_chuong_1_react_foundation.md', this)">Chương 1: Nền tảng React (Enterprise)</li>
-                <li class="nav-item" onclick="loadMarkdown('next_react_js/02_chuong_2_khoi_tao_nextjs.md', this)">Chương 2: Khởi tạo Dự án Chuẩn</li>
-            </ul>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 2: Routing & Rendering</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('next_react_js/03_chuong_3_routing_app_router.md', this)">Chương 3: Routing App Router</li>
-                <li class="nav-item" onclick="loadMarkdown('next_react_js/04_chuong_4_kien_truc_rendering.md', this)">Chương 4: Server vs Client Components</li>
-            </ul>
+                    <h2 class="nav-category">Đặc Biệt</h2>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_21_full_source_code.md', this)">
+                        Chương 21: Full Source Code</li>
+                    <li class="nav-item" onclick="loadMarkdown('farmer_game/chuong_22_toi_uu_hieu_nang.md', this)">
+                        Chương 22: Tối Ưu Hiệu Năng</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('farmer_game/chuong_23_cai_thien_su_song_cho_moi_truong.md', this)">Chương
+                        23: Sự Sống Môi Trường</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 3: Dữ Liệu & UI</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('next_react_js/05_chuong_5_data_fetching_mutations.md', this)">Chương 5: Data Fetching & Mutations</li>
-                <li class="nav-item" onclick="loadMarkdown('next_react_js/06_chuong_6_styling_ui.md', this)">Chương 6: Styling (Tailwind/Modules)</li>
-            </ul>
+        <div id="tab-ninja" class="tab-content">
+            <div class="sidebar-header">
+                <h1 style="color: #ef4444;"><i class="fas fa-user-ninja"></i> Làng Tonek</h1>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 1: Platformer 2D</div>
+                <ul class="nav-list" id="nav-ninja-p1">
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/muc_luc.md', this)">Giới thiệu & Mục lục
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_1_khoi_tao_trong_luc.md', this)">
+                        Chương 1: Khởi tạo & Trọng lực</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_2_va_cham_ban_do.md', this)">Chương
+                        2: Va chạm Bản đồ</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_3_camera_cuon_nen.md', this)">Chương
+                        3: Camera 2D & Cuộn nền</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 2: Võ học & Kỹ năng</div>
+                <ul class="nav-list" id="nav-ninja-p2">
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_4_ecs_hanh_dong.md', this)">Chương
+                        4: Kiến trúc ECS</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_5_mon_phai.md', this)">Chương 5: 6
+                        Môn Phái Huyền Thoại</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_6_ky_nang_hitbox.md', this)">Chương
+                        6: Hệ thống Tung Chiêu</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_7_dan_phi_tieu.md', this)">Chương 7:
+                        Đạn & Phi tiêu</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 3: Quái vật & Combat</div>
+                <ul class="nav-list" id="nav-ninja-p3">
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_8_ai_quai_vat.md', this)">Chương 8:
+                        AI Quái vật Platformer</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_9_sat_thuong.md', this)">Chương 9:
+                        Toán học Sát thương</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_10_trang_thai_di_thuong.md', this)">
+                        Chương 10: Trạng thái dị thường</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_11_text_sat_thuong.md', this)">
+                        Chương 11: Text sát thương nhảy lên</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 4: Trang bị & Đập đồ</div>
+                <ul class="nav-list" id="nav-ninja-p4">
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_12_hanh_trang.md', this)">Chương 12:
+                        Hành trang (Inventory)</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_13_chi_so_random.md', this)">Chương
+                        13: Sinh chỉ số trang bị</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_14_thuat_toan_dap_do.md', this)">
+                        Chương 14: Thuật toán Đập đồ</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_15_ghep_da.md', this)">Chương 15:
+                        Ghép đá & Ngọc</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 5: UI & Hoàn thiện</div>
+                <ul class="nav-list" id="nav-ninja-p5">
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_16_giao_dien.md', this)">Chương 16:
+                        Giao diện (HP, MP)</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_17_chuyen_map_save.md', this)">
+                        Chương 17: Chuyển Map & Save</li>
+                    <li class="nav-item" onclick="loadMarkdown('ninja_school/chuong_18_full_code.md', this)">Chương 18:
+                        Full Source Code</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 4: Backend & Bảo Mật</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('next_react_js/08_chuong_8_backend_api_middleware.md', this)">Chương 8: Backend & Middleware</li>
-                <li class="nav-item" onclick="loadMarkdown('next_react_js/09_chuong_9_authentication.md', this)">Chương 9: Authentication & RBAC</li>
-            </ul>
+        <div id="tab-odin" class="tab-content">
+            <div class="sidebar-header">
+                <h1 style="color: #3b82f6;"><i class="fas fa-book-open"></i> Odin: 0 to Hero</h1>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 1: Nhập môn</div>
+                <ul class="nav-list">
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/muc_luc.md', this)">Giới thiệu & Mục lục
+                    </li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('odin_0_to_hero/chuong_1_gioi_thieu_va_cai_dat.md', this)">Chương 1: Giới
+                        thiệu & Cài đặt</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('odin_0_to_hero/chuong_2_bien_hang_va_kieu_du_lieu.md', this)">Chương 2:
+                        Biến, Hằng số & Kiểu DL</li>
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_3_toan_tu_va_ep_kieu.md', this)">
+                        Chương 3: Toán tử & Ép kiểu</li>
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_4_cau_truc_dieu_khien.md', this)">
+                        Chương 4: Cấu trúc điều khiển</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 2: CTDL & Hàm</div>
+                <ul class="nav-list">
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_5_mang_slice_chuoi.md', this)">
+                        Chương 5: Mảng, Slice & Chuỗi</li>
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_6_ham_va_defer.md', this)">Chương
+                        6: Hàm & Defer</li>
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_7_struct_union_enum.md', this)">
+                        Chương 7: Struct, Union, Enum</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 3: Bộ nhớ & Con trỏ</div>
+                <ul class="nav-list">
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_8_con_tro.md', this)">Chương 8:
+                        Con trỏ</li>
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_9_quan_ly_bo_nho.md', this)">
+                        Chương 9: Stack vs Heap</li>
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_10_he_thong_context.md', this)">
+                        Chương 10: Hệ thống Context</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('odin_0_to_hero/chuong_11_cau_truc_du_lieu_dong.md', this)">Chương 11:
+                        Mảng động & Map</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 4: Nâng cao</div>
+                <ul class="nav-list">
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_12_allocators.md', this)">Chương
+                        12: Allocators & Arena</li>
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_13_da_luong.md', this)">Chương 13:
+                        Đa luồng (Threading)</li>
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_14_bitwise_dod.md', this)">Chương
+                        14: Bitwise & DOD</li>
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_15_c_interop.md', this)">Chương
+                        15: Giao tiếp với C</li>
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_16_reflection.md', this)">Chương
+                        16: Polymorphism & Reflection</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 5: Tổ chức dự án</div>
+                <ul class="nav-list">
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_17_packages_scope.md', this)">
+                        Chương 17: Packages & Scope</li>
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_18_xu_ly_loi.md', this)">Chương
+                        18: Xử lý lỗi</li>
+                    <li class="nav-item" onclick="loadMarkdown('odin_0_to_hero/chuong_19_testing.md', this)">Chương 19:
+                        Viết Test (Testing)</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 5: Triển khai & Tối Ưu</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('next_react_js/07_chuong_7_toi_uu_hoa_seo.md', this)">Chương 7: Tối ưu hóa & SEO</li>
-                <li class="nav-item" onclick="loadMarkdown('next_react_js/10_chuong_10_deployment.md', this)">Chương 10: Triển khai & Docker</li>
-                <li class="nav-item" onclick="loadMarkdown('next_react_js/11_chuong_11_capstone_projects.md', this)">Chương 11: Dự án Capstone</li>
-            </ul>
-        </div>
-</div>
+        <div id="tab-nextjs" class="tab-content">
+            <div class="sidebar-header">
+                <h1 style="color: #10b981;"><i class="fab fa-react"></i> Next.js Toàn Tập</h1>
+            </div>
 
-<div id="tab-reactjs" class="tab-content">
-        <div class="sidebar-header">
-            <h1 style="color: #61dafb;"><i class="fab fa-react"></i> ReactJS Enterprise</h1>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 1: Kiến Trúc & Tư Duy</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('reactjs/00_muc_luc.md', this)">Giới thiệu & Lộ trình</li>
-                <li class="nav-item" onclick="loadMarkdown('reactjs/01_chuong_1_to_chuc_thu_muc.md', this)">Chương 1: Tổ chức thư mục chuẩn Enterprise</li>
-                <li class="nav-item" onclick="loadMarkdown('reactjs/02_chuong_2_tu_duy_component_solid.md', this)">Chương 2: Tư duy Component hóa & SOLID</li>
-            </ul>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 2: Quản Lý Trạng Thái</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('reactjs/03_chuong_3_quan_ly_state.md', this)">Chương 3: State Management Hiện Đại</li>
-                <li class="nav-item" onclick="loadMarkdown('reactjs/04_chuong_4_global_state_zustand_redux.md', this)">Chương 4: Global State (Zustand/RTK)</li>
-                <li class="nav-item" onclick="loadMarkdown('reactjs/05_chuong_5_server_state_react_query.md', this)">Chương 5: Server State với React Query</li>
-            </ul>
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 1: Nhập Môn & Khởi Tạo</div>
+                <ul class="nav-list">
+                    <li class="nav-item" onclick="loadMarkdown('next_react_js/00_muc_luc.md', this)">Giới thiệu & Mục
+                        lục</li>
+                    <li class="nav-item" onclick="loadMarkdown('next_react_js/01_chuong_1_react_foundation.md', this)">
+                        Chương 1: Nền tảng React (Enterprise)</li>
+                    <li class="nav-item" onclick="loadMarkdown('next_react_js/02_chuong_2_khoi_tao_nextjs.md', this)">
+                        Chương 2: Khởi tạo Dự án Chuẩn</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 2: Routing & Rendering</div>
+                <ul class="nav-list">
+                    <li class="nav-item"
+                        onclick="loadMarkdown('next_react_js/03_chuong_3_routing_app_router.md', this)">Chương 3:
+                        Routing App Router</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('next_react_js/04_chuong_4_kien_truc_rendering.md', this)">Chương 4:
+                        Server vs Client Components</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 3: Dữ Liệu & UI</div>
+                <ul class="nav-list">
+                    <li class="nav-item"
+                        onclick="loadMarkdown('next_react_js/05_chuong_5_data_fetching_mutations.md', this)">Chương 5:
+                        Data Fetching & Mutations</li>
+                    <li class="nav-item" onclick="loadMarkdown('next_react_js/06_chuong_6_styling_ui.md', this)">Chương
+                        6: Styling (Tailwind/Modules)</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 4: Backend & Bảo Mật</div>
+                <ul class="nav-list">
+                    <li class="nav-item"
+                        onclick="loadMarkdown('next_react_js/08_chuong_8_backend_api_middleware.md', this)">Chương 8:
+                        Backend & Middleware</li>
+                    <li class="nav-item" onclick="loadMarkdown('next_react_js/09_chuong_9_authentication.md', this)">
+                        Chương 9: Authentication & RBAC</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 5: Triển khai & Tối Ưu</div>
+                <ul class="nav-list">
+                    <li class="nav-item" onclick="loadMarkdown('next_react_js/07_chuong_7_toi_uu_hoa_seo.md', this)">
+                        Chương 7: Tối ưu hóa & SEO</li>
+                    <li class="nav-item" onclick="loadMarkdown('next_react_js/10_chuong_10_deployment.md', this)">Chương
+                        10: Triển khai & Docker</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('next_react_js/11_chuong_11_capstone_projects.md', this)">Chương 11: Dự án
+                        Capstone</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 3: Routing & Form</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('reactjs/06_chuong_6_routing_react_router.md', this)">Chương 6: Routing với React Router v6+</li>
-                <li class="nav-item" onclick="loadMarkdown('reactjs/07_chuong_7_form_rhf_zod.md', this)">Chương 7: Form chuẩn với RHF & Zod</li>
-            </ul>
-        </div>
+        <div id="tab-reactjs" class="tab-content">
+            <div class="sidebar-header">
+                <h1 style="color: #61dafb;"><i class="fab fa-react"></i> ReactJS Enterprise</h1>
+            </div>
 
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 4: Hiệu Năng & Dữ Liệu Lớn</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('reactjs/08_chuong_8_toi_uu_hieu_nang.md', this)">Chương 8: Tối ưu hiệu năng (Memoization)</li>
-                <li class="nav-item" onclick="loadMarkdown('reactjs/09_chuong_9_code_splitting_virtualization.md', this)">Chương 9: Code Splitting & Virtualization</li>
-                <li class="nav-item" onclick="loadMarkdown('reactjs/10_chuong_10_concurrent_react_18.md', this)">Chương 10: Sức mạnh Concurrent React 18</li>
-            </ul>
-        </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 1: Kiến Trúc & Tư Duy</div>
+                <ul class="nav-list">
+                    <li class="nav-item" onclick="loadMarkdown('reactjs/00_muc_luc.md', this)">Giới thiệu & Lộ trình
+                    </li>
+                    <li class="nav-item" onclick="loadMarkdown('reactjs/01_chuong_1_to_chuc_thu_muc.md', this)">Chương
+                        1: Tổ chức thư mục chuẩn Enterprise</li>
+                    <li class="nav-item" onclick="loadMarkdown('reactjs/02_chuong_2_tu_duy_component_solid.md', this)">
+                        Chương 2: Tư duy Component hóa & SOLID</li>
+                </ul>
+            </div>
 
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 5: UI/UX & Testing</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('reactjs/11_chuong_11_design_system_storybook.md', this)">Chương 11: Design System (Radix, Tailwind)</li>
-                <li class="nav-item" onclick="loadMarkdown('reactjs/12_chuong_12_testing_vitest_playwright.md', this)">Chương 12: Testing (Vitest, Playwright)</li>
-            </ul>
-        </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 2: Quản Lý Trạng Thái</div>
+                <ul class="nav-list">
+                    <li class="nav-item" onclick="loadMarkdown('reactjs/03_chuong_3_quan_ly_state.md', this)">Chương 3:
+                        State Management Hiện Đại</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('reactjs/04_chuong_4_global_state_zustand_redux.md', this)">Chương 4:
+                        Global State (Zustand/RTK)</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('reactjs/05_chuong_5_server_state_react_query.md', this)">Chương 5: Server
+                        State với React Query</li>
+                </ul>
+            </div>
 
-        <div class="nav-section">
-            <div class="nav-section-title">Phần 6: Bảo Mật & CI/CD</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="loadMarkdown('reactjs/13_chuong_13_bao_mat_frontend.md', this)">Chương 13: Bảo mật Frontend (XSS, CSRF)</li>
-                <li class="nav-item" onclick="loadMarkdown('reactjs/14_chuong_14_docker_ci_cd.md', this)">Chương 14: Docker, Nginx & CI/CD</li>
-            </ul>
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 3: Routing & Form</div>
+                <ul class="nav-list">
+                    <li class="nav-item" onclick="loadMarkdown('reactjs/06_chuong_6_routing_react_router.md', this)">
+                        Chương 6: Routing với React Router v6+</li>
+                    <li class="nav-item" onclick="loadMarkdown('reactjs/07_chuong_7_form_rhf_zod.md', this)">Chương 7:
+                        Form chuẩn với RHF & Zod</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 4: Hiệu Năng & Dữ Liệu Lớn</div>
+                <ul class="nav-list">
+                    <li class="nav-item" onclick="loadMarkdown('reactjs/08_chuong_8_toi_uu_hieu_nang.md', this)">Chương
+                        8: Tối ưu hiệu năng (Memoization)</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('reactjs/09_chuong_9_code_splitting_virtualization.md', this)">Chương 9:
+                        Code Splitting & Virtualization</li>
+                    <li class="nav-item" onclick="loadMarkdown('reactjs/10_chuong_10_concurrent_react_18.md', this)">
+                        Chương 10: Sức mạnh Concurrent React 18</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 5: UI/UX & Testing</div>
+                <ul class="nav-list">
+                    <li class="nav-item"
+                        onclick="loadMarkdown('reactjs/11_chuong_11_design_system_storybook.md', this)">Chương 11:
+                        Design System (Radix, Tailwind)</li>
+                    <li class="nav-item"
+                        onclick="loadMarkdown('reactjs/12_chuong_12_testing_vitest_playwright.md', this)">Chương 12:
+                        Testing (Vitest, Playwright)</li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Phần 6: Bảo Mật & CI/CD</div>
+                <ul class="nav-list">
+                    <li class="nav-item" onclick="loadMarkdown('reactjs/13_chuong_13_bao_mat_frontend.md', this)">Chương
+                        13: Bảo mật Frontend (XSS, CSRF)</li>
+                    <li class="nav-item" onclick="loadMarkdown('reactjs/14_chuong_14_docker_ci_cd.md', this)">Chương 14:
+                        Docker, Nginx & CI/CD</li>
+                </ul>
+            </div>
         </div>
-</div>
 
     </nav>
 
@@ -1170,7 +1391,8 @@
         <div id="mobile-header">
             <button class="hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
             <div class="mobile-title" style="flex: 1; text-align: center;">Raylib Odin</div>
-            <button class="hamburger" style="margin-right: 0; margin-left: 15px;" onclick="toggleRightSidebar()"><i class="fas fa-list"></i></button>
+            <button class="hamburger" style="margin-right: 0; margin-left: 15px;" onclick="toggleRightSidebar()"><i
+                    class="fas fa-list"></i></button>
         </div>
 
         <!-- Lớp phủ mờ khi mở Sidebar -->
@@ -1256,9 +1478,9 @@
 
             // Xóa active class của tất cả các item
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            
+
             let activeItem = navElement;
-            
+
             // Thêm active class cho item hiện tại
             if (activeItem) {
                 activeItem.classList.add('active');
@@ -1271,7 +1493,7 @@
                     }
                 });
             }
-            
+
             // Tự động chuyển đến Tab chứa bài viết
             if (activeItem) {
                 const parentTab = activeItem.closest('.tab-content');
@@ -1330,7 +1552,7 @@
                 if (tocList) {
                     tocList.innerHTML = '';
                     const headings = contentDiv.querySelectorAll('h2, h3');
-                    
+
                     if (headings.length === 0) {
                         tocList.innerHTML = '<div style="color: #64748b; font-size: 0.85rem;">Không có mục lục</div>';
                     } else {
@@ -1338,15 +1560,15 @@
                             // Cấp ID cho thẻ để scrollTo
                             const id = 'heading-' + index;
                             h.id = id;
-                            
+
                             const link = document.createElement('a');
                             link.href = '#' + id;
                             link.className = 'toc-item toc-' + h.tagName; // toc-H2, toc-H3
-                            
+
                             // Gắn Icon để giống Folder Explorer
                             let text = h.innerText;
                             let icon = '<i class="fas fa-hashtag"></i>'; // Mặc định
-                            
+
                             if (text.includes('.odin') || text.includes('.json')) {
                                 icon = '<i class="fas fa-file-code" style="color: #38bdf8;"></i>';
                             } else if (text.includes('.md')) {
@@ -1354,9 +1576,9 @@
                             } else if (text.toLowerCase().includes('package') || text.includes('/')) {
                                 icon = '<i class="fas fa-folder" style="color: #eab308;"></i>';
                             }
-                            
+
                             link.innerHTML = icon + text;
-                            
+
                             // Smooth scroll
                             link.onclick = (e) => {
                                 e.preventDefault();
@@ -1368,7 +1590,7 @@
                                     closeAllSidebars();
                                 }
                             };
-                            
+
                             tocList.appendChild(link);
                         });
                     }
@@ -1404,7 +1626,7 @@
                     if (parentTab) {
                         const navItems = Array.from(parentTab.querySelectorAll('.nav-item'));
                         const activeIndex = navItems.indexOf(activeNavItem);
-                        
+
                         if (activeIndex !== -1) {
                             const navButtonsDiv = document.createElement('div');
                             navButtonsDiv.className = 'nav-buttons-container';
