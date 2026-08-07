@@ -113,6 +113,55 @@
                 ]
             };
         });
+
+        // Custom Highlight.js for GDScript
+        hljs.registerLanguage('gdscript', function (e) {
+            const KEYWORDS = {
+                keyword: 'if elif else for while break continue pass return match case await class class_name extends is as self tool signal func static const enum var super preload assert breakpoint rpc',
+                literal: 'true false null PI TAU INF NAN',
+                built_in: 'print randi randf randi_range randf_range lerp clamp abs min max get_node get_tree move_and_slide move_and_collide queue_free',
+                type: 'int float bool void String Array Dictionary Vector2 Vector2i Vector3 Vector3i Color Rect2 Rect2i Transform2D Transform3D Node Node2D Node3D Object Resource RefCounted Control CharacterBody2D RigidBody2D StaticBody2D Area2D Camera2D AudioStreamPlayer2D RayCast2D'
+            };
+
+            const STRINGS = {
+                className: 'string',
+                variants: [
+                    e.QUOTE_STRING_MODE,
+                    e.APOS_STRING_MODE,
+                    { begin: '"""', end: '"""' },
+                    { begin: "'''", end: "'''" }
+                ]
+            };
+
+            const FUNC_INVOKE = {
+                className: 'title.function',
+                begin: /\b[a-zA-Z_]\w*(?=\s*\()/
+            };
+
+            const NODE_PATH = {
+                className: 'symbol', // Pink
+                begin: /[\$%][a-zA-Z0-9_\/]+/
+            };
+
+            const ANNOTATION = {
+                className: 'meta', // Yellow/Meta
+                begin: /@[a-zA-Z_]\w*/
+            };
+
+            return {
+                name: 'GDScript',
+                aliases: ['gdscript', 'gd'],
+                keywords: KEYWORDS,
+                contains: [
+                    e.HASH_COMMENT_MODE,
+                    STRINGS,
+                    e.C_NUMBER_MODE,
+                    FUNC_INVOKE,
+                    NODE_PATH,
+                    ANNOTATION
+                ]
+            };
+        });
     </script>
     <!-- Google Fonts -->
     <link
